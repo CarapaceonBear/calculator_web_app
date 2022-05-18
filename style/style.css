@@ -43,4 +43,96 @@
 .header__formula--text {
   margin: 0;
   font-size: 28px;
+}
+
+.main__panel {
+  display: grid;
+  grid-template-columns: repeat(4, 95px);
+  grid-template-rows: repeat(5, 95px);
+  gap: 5px;
+  grid-template-areas: "bracket root power divide" "seven eight nine multiply" "four five six subtract" "one two three add" "decimal zero backspace equals";
+  width: 400px;
+}
+.main__button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-family: "Pacifico", cursive;
+  font-size: 32px;
+}
+.main__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e991b0;
+  border-radius: 30%;
+}
+.main__box--zero {
+  grid-area: zero;
+}
+.main__box--one {
+  grid-area: one;
+}
+.main__box--two {
+  grid-area: two;
+}
+.main__box--three {
+  grid-area: three;
+}
+.main__box--four {
+  grid-area: four;
+}
+.main__box--five {
+  grid-area: five;
+}
+.main__box--six {
+  grid-area: six;
+}
+.main__box--seven {
+  grid-area: seven;
+}
+.main__box--eight {
+  grid-area: eight;
+}
+.main__box--nine {
+  grid-area: nine;
+}
+.main__box--decimal {
+  grid-area: decimal;
+  background-color: #d46685;
+}
+.main__box--backspace {
+  grid-area: backspace;
+  background-color: #d46685;
+}
+.main__box--add {
+  grid-area: add;
+  background-color: #d46685;
+}
+.main__box--subtract {
+  grid-area: subtract;
+  background-color: #d46685;
+}
+.main__box--multiply {
+  grid-area: multiply;
+  background-color: #d46685;
+}
+.main__box--divide {
+  grid-area: divide;
+  background-color: #d46685;
+}
+.main__box--bracket {
+  grid-area: bracket;
+  background-color: #d46685;
+}
+.main__box--root {
+  grid-area: root;
+  background-color: #d46685;
+}
+.main__box--power {
+  grid-area: power;
+  background-color: #d46685;
+}
+.main__box--equals {
+  grid-area: equals;
+  background-color: #d0436f;
 }/*# sourceMappingURL=style.css.map */
