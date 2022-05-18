@@ -2,11 +2,14 @@
 @use "./mixins" as *;
 
 .main {
+    display: flex;
+    justify-content: center;
+    
     &__panel {
         display: grid;
-        grid-template-columns: repeat(4, 95px);
-        grid-template-rows: repeat(5, 95px);
-        gap: 5px;
+        grid-template-columns: repeat(4, 94px);
+        grid-template-rows: repeat(5, 94px);
+        gap: 8px;
         grid-template-areas:
         "bracket root power divide"
         "seven eight nine multiply"
