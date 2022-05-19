@@ -22,29 +22,62 @@ const buttonRoot = document.getElementById("button-root");
 const buttonPower = document.getElementById("button-power");
 const buttonEquals = document.getElementById("button-equals");
 
-console.log("script linked");
+let currentResult = null
 
-const testLog = (event) => {
+console.log("script linked");
+resultText.innerText = "";
+formulaText.innerText = "";
+
+const onButtonClick = (event) => {
     console.log(event.target.value);
+    // if equals button is pressed, run calculation
+    if (event.target.value === "=") {
+        runCalculation(formulaText.innerText);
+    // if backspace button is pressed, remove last character
+    } else if (event.target.value === "backspace") {
+        formulaText.innerText = formulaText.innerText
+        .substring(0, formulaText.innerText.length - 1);
+    // if bracket button is pressed, append an open bracket,
+    // if there is already an open bracket, append a closed bracket.
+
+    
+    // otherwise append the value of the button
+    } else {
+        formulaText.innerText += event.target.value;
+    }
+
 }
 
-buttonZero.addEventListener("click", testLog);
-buttonOne.addEventListener("click", testLog);
-buttonTwo.addEventListener("click", testLog);
-buttonThree.addEventListener("click", testLog);
-buttonFour.addEventListener("click", testLog);
-buttonFive.addEventListener("click", testLog);
-buttonSix.addEventListener("click", testLog);
-buttonSeven.addEventListener("click", testLog);
-buttonEight.addEventListener("click", testLog);
-buttonNine.addEventListener("click", testLog);
-buttonDecimal.addEventListener("click", testLog);
-buttonBackspace.addEventListener("click", testLog);
-buttonAdd.addEventListener("click", testLog);
-buttonSubtract.addEventListener("click", testLog);
-buttonMultiply.addEventListener("click", testLog);
-buttonDivide.addEventListener("click", testLog);
-buttonBracket.addEventListener("click", testLog);
-buttonRoot.addEventListener("click", testLog);
-buttonPower.addEventListener("click", testLog);
-buttonEquals.addEventListener("click", testLog);
+const runCalculation = (formula) => {
+    // parses the formula and calculates the result.
+    // result is displayed in both formula field.
+    // it will also display in result field, after input continues.
+
+    // placeholder
+    currentResult = formula;
+    formulaText.innerText = currentResult;
+    // temporary, move to onButtonClick later, to be triggered on first 
+    // input after calculation.
+    resultText.innerText = currentResult;
+}
+
+buttonZero.addEventListener("click", onButtonClick);
+buttonOne.addEventListener("click", onButtonClick);
+buttonTwo.addEventListener("click", onButtonClick);
+buttonThree.addEventListener("click", onButtonClick);
+buttonFour.addEventListener("click", onButtonClick);
+buttonFive.addEventListener("click", onButtonClick);
+buttonSix.addEventListener("click", onButtonClick);
+buttonSeven.addEventListener("click", onButtonClick);
+buttonEight.addEventListener("click", onButtonClick);
+buttonNine.addEventListener("click", onButtonClick);
+buttonDecimal.addEventListener("click", onButtonClick);
+buttonBackspace.addEventListener("click", onButtonClick);
+buttonAdd.addEventListener("click", onButtonClick);
+buttonSubtract.addEventListener("click", onButtonClick);
+buttonMultiply.addEventListener("click", onButtonClick);
+buttonDivide.addEventListener("click", onButtonClick);
+buttonBracket.addEventListener("click", onButtonClick);
+buttonRoot.addEventListener("click", onButtonClick);
+buttonPower.addEventListener("click", onButtonClick);
+buttonEquals.addEventListener("click", onButtonClick);
