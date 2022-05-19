@@ -30,27 +30,36 @@ formulaText.innerText = "";
 
 const onButtonClick = (event) => {
     console.log(event.target.value);
+    // append value of button to the formula display
+    formulaText.innerText += event.target.value;
+}
+
+const onEqualsClicked = (event) => {
+    console.log(event.target.value);
     // if equals button is pressed, run calculation
-    if (event.target.value === "=") {
+    if (formulaText.innerText.length > 0) {
         runCalculation(formulaText.innerText);
-    // if backspace button is pressed, remove last character
-    } else if (event.target.value === "backspace") {
-        formulaText.innerText = formulaText.innerText
-        .substring(0, formulaText.innerText.length - 1);
-    // if bracket button is pressed, append an open bracket,
-    // if there is already an open bracket, append a closed bracket.
-
-    
-    // otherwise append the value of the button
-    } else {
-        formulaText.innerText += event.target.value;
     }
+}
 
+const onBackspaceClicked = (event) => {
+    console.log(event.target.value);
+    // if backspace button is pressed, remove last character
+    formulaText.innerText = formulaText.innerText
+    .substring(0, formulaText.innerText.length - 1);
+    // TO DO if mouse button is held down, fully clear the display
+}
+const onBracketClicked = (event) => {
+    console.log(event.target.value);
+    // if bracket button is pressed, append an open bracket,
+    // if there is already an open bracket, append a closed bracket. 
 }
 
 const runCalculation = (formula) => {
     // parses the formula and calculates the result.
-    // result is displayed in both formula field.
+    // (if the result is no different from the formula, 
+    //  eg if the 'formula' is just '4', then return nothing)
+    // result is displayed in formula field.
     // it will also display in result field, after input continues.
 
     // placeholder
@@ -72,12 +81,12 @@ buttonSeven.addEventListener("click", onButtonClick);
 buttonEight.addEventListener("click", onButtonClick);
 buttonNine.addEventListener("click", onButtonClick);
 buttonDecimal.addEventListener("click", onButtonClick);
-buttonBackspace.addEventListener("click", onButtonClick);
+buttonBackspace.addEventListener("click", onBackspaceClicked);
 buttonAdd.addEventListener("click", onButtonClick);
 buttonSubtract.addEventListener("click", onButtonClick);
 buttonMultiply.addEventListener("click", onButtonClick);
 buttonDivide.addEventListener("click", onButtonClick);
-buttonBracket.addEventListener("click", onButtonClick);
+buttonBracket.addEventListener("click", onBracketClicked);
 buttonRoot.addEventListener("click", onButtonClick);
 buttonPower.addEventListener("click", onButtonClick);
-buttonEquals.addEventListener("click", onButtonClick);
+buttonEquals.addEventListener("click", onEqualsClicked);
