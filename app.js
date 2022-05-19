@@ -22,7 +22,9 @@ const buttonRoot = document.getElementById("button-root");
 const buttonPower = document.getElementById("button-power");
 const buttonEquals = document.getElementById("button-equals");
 
-let currentResult = null
+const numberCheck = new RegExp('[0-9]');
+let currentResult = null;
+let openBracket = 0;
 
 console.log("script linked");
 resultText.innerText = "";
@@ -50,9 +52,25 @@ const onBackspaceClicked = (event) => {
     // TO DO if mouse button is held down, fully clear the display
 }
 const onBracketClicked = (event) => {
+    console.log(openBracket);
     console.log(event.target.value);
     // if bracket button is pressed, append an open bracket,
     // if there is already an open bracket, append a closed bracket. 
+    if (openBracket == 0) {
+        formulaText.innerText += "(";
+        openBracket ++;
+    } else {
+        // check if current final character is a number, or ")",
+        // if not, open another bracket.
+        if ((numberCheck.test(formulaText.innerText[formulaText.innerText.length-1]))
+         || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
+            formulaText.innerText += ")";
+            openBracket --;
+        } else {
+            formulaText.innerText += "(";
+            openBracket ++;
+        }
+    }
 }
 
 const runCalculation = (formula) => {
