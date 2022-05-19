@@ -20,14 +20,6 @@
         @include calculatorWidth();
     }
 
-    &__button {
-        background-color: rgba(0, 0, 0, 0);
-        border: none;
-
-        font-family: $primary-font;
-        font-size: $text-buttons;
-    }
-
     &__box {
         // background-color: $light-display-color;
         display: flex;

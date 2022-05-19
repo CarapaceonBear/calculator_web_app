@@ -57,12 +57,6 @@
   grid-template-areas: "bracket root power divide" "seven eight nine multiply" "four five six subtract" "one two three add" "decimal zero backspace equals";
   width: 400px;
 }
-.main__button {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  font-family: "Pacifico", cursive;
-  font-size: 32px;
-}
 .main__box {
   display: flex;
   justify-content: center;
@@ -127,7 +121,6 @@
 .main__box--bracket {
   grid-area: bracket;
   background-color: #e89bb1;
-  font-weight: 100;
 }
 .main__box--root {
   grid-area: root;
@@ -140,4 +133,17 @@
 .main__box--equals {
   grid-area: equals;
   background-color: #dd658b;
+}
+
+.main__button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  height: 94px;
+  width: 94px;
+  border-radius: 30%;
+  font-family: "Pacifico", cursive;
+  font-size: 32px;
+}
+.main__button:hover {
+  background-color: #f13570;
 }/*# sourceMappingURL=style.css.map */
