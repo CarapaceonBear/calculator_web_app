@@ -39,6 +39,9 @@ const onButtonClick = (event) => {
 const onEqualsClicked = (event) => {
     console.log(event.target.value);
     // if equals button is pressed, run calculation
+    // TO DO
+    // if final character is a functional symbol (eg "+"), don't run
+    // if openBracket is positive, append ")"s until it is 0
     if (formulaText.innerText.length > 0) {
         runCalculation(formulaText.innerText);
     }
@@ -75,6 +78,7 @@ const onBracketClicked = (event) => {
 
 const runCalculation = (formula) => {
     // parses the formula and calculates the result.
+    //   this is handled by calculator.js and returned
     // (if the result is no different from the formula, 
     //  eg if the 'formula' is just '4', then return nothing)
     // result is displayed in formula field.
