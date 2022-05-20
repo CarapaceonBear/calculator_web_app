@@ -126,7 +126,7 @@ let workingFormula = "";
 
 // const numberCheck = new RegExp("[0-9]");
 const numberDecimalCheck = new RegExp("[0-9.]");
-const operators = ["*", "/", "+", "-"];
+const operators = ["^","√","*", "/", "+", "-"];
 
 let bracketStart = 0;
 let bracketEnd = 0;
@@ -145,7 +145,6 @@ const calculationRunner = (overallCalculation) => {
             segmentCount ++;
         };
     };
-    console.log(`segment count: ${segmentCount}`);
     // run the bracket segment calculator that many times
     for (let j = 1; j <= segmentCount; j++) {
         let segmentResult = bracketSegmenter(workingFormula);
@@ -170,49 +169,27 @@ const calculationRunner = (overallCalculation) => {
 
 const performCalculation = (segment) => {
     let workingSegment = segment
-    // POWERS
-    // count how many
-    let powersCount = 0;
-    for (let i = 0; i < workingSegment.length; i++) {
-        if (workingSegment[i] == "^") {
-            powersCount ++;
-        };
-    };
-    // run the powers function for each
-    for (let j = 1; j <= powersCount; j++) {
-        let powerResult = calculatePowers(workingSegment);
-        workingSegment = 
-        `${workingSegment.slice(0, preceder)}${powerResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
-    };
-
-    // ROOTS
-    // count how many
-    let rootsCount = 0;
-    for (let i = 0; i < workingSegment.length; i++) {
-        if (workingSegment[i] == "√") {
-            rootsCount ++;
-        };
-    };
-    // run the roots function for each
-    for (let j = 1; j <= rootsCount; j++) {
-        let rootsResult = calculateRoots(workingSegment);
-        // if a number directly precedes, insert "*"
-        if (numberCheck.test(workingSegment[preceder-1])) {
-           rootsResult = `*${rootsResult}`;
-        }
-        workingSegment = 
-        `${workingSegment.slice(0, preceder)}${rootsResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
-    };
-
+    // perform the calculation process for each operator in sequence
     operators.forEach((operator) => {
+        // count how many of the given operator there are
         currentCount = 0;
         for (let i = 0; i < workingSegment.length; i++) {
             if (workingSegment[i] == operator) {
                 currentCount ++;
             };
         };
+        // run the calculation that many times, passing in the specific operator
         for (let j = 1; j <= currentCount; j++) {
+
             let basicResult = calculateBasic(workingSegment, operator);
+           
+            if (operator === "√") {
+                // if a number directly precedes, insert "*"
+                if (numberCheck.test(workingSegment[preceder-1])) {
+                    basicResult = `*${basicResult}`;
+                }
+            }
+
             workingSegment = 
             `${workingSegment.slice(0, preceder)}${basicResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
         };
@@ -245,11 +222,13 @@ const calculateBasic = (segment, symbol) => {
     // get the first operator in the current segment
     let operatorIndex = segment.indexOf(operator);
     // get the surrounding numbers
-    for (let i = operatorIndex-1; i >= 0; i--) {
-        if (numberDecimalCheck.test(segment[i])) {
-            preceder = i;
-        } else {
-            break;
+    if (operator != "√") {
+        for (let i = operatorIndex-1; i >= 0; i--) {
+            if (numberDecimalCheck.test(segment[i])) {
+                preceder = i;
+            } else {
+                break;
+            }
         }
     }
     for (let j = operatorIndex+1; j < segment.length; j++) {
@@ -259,10 +238,22 @@ const calculateBasic = (segment, symbol) => {
             break;
         }
     }  
-    // run the calculation
+
+    // grab the relevant numbers from the segment
+    if (operator === "√") {
+        // for roots specifically, just need the numbers after
+        // however, need to update this to slice the result back in
+        preceder = operatorIndex;
+    }
+    
     let preNumber = parseFloat(segment.slice(preceder, operatorIndex));
     let postNumber = parseFloat(segment.slice(operatorIndex+1, follower+1));
+    // run the calculation, depending on the given operator
     switch(operator) {
+        case "^":
+            return Math.pow(preNumber, postNumber);
+        case "√":
+            return Math.sqrt(postNumber);
         case "*":
             return (preNumber * postNumber);
         case "/":
@@ -274,45 +265,4 @@ const calculateBasic = (segment, symbol) => {
         default:
             return null;
     }
-}
-
-const calculatePowers = (segment) => {
-    // get the first power in the current segment
-    let powerIndex = segment.indexOf("^");
-    // get the surrounding numbers
-    for (let i = powerIndex-1; i >= 0; i--) {
-        if (numberDecimalCheck.test(segment[i])) {
-            preceder = i;
-        } else {
-            break;
-        }
-    }
-    for (let j = powerIndex+1; j < segment.length; j++) {
-        if (numberDecimalCheck.test(segment[j])) {
-            follower = j;
-        } else {
-            break;
-        }
-    }
-    // run the calculation
-    let preNumber = parseFloat(segment.slice(preceder, powerIndex));
-    let postNumber = parseFloat(segment.slice(powerIndex+1, follower+1));
-    return Math.pow(preNumber, postNumber);
-}
-
-const calculateRoots = (segment) => {
-    // get the first root in the current segment
-    let rootIndex = segment.indexOf("√");
-    // get the following numbers
-    for (let i = rootIndex+1; i < segment.length; i++) {
-        if (numberDecimalCheck.test(segment[i])) {
-            follower = i;
-        } else {
-            break;
-        }
-    }
-    preceder = rootIndex; // need to update this to slice the result back in
-    // run the calculation
-    let postNumber = parseFloat(segment.slice(rootIndex+1, follower+1));
-    return Math.sqrt(postNumber);
 }
