@@ -1,0 +1,103 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.main {
+    display: flex;
+    justify-content: center;
+    
+    &__panel {
+        display: grid;
+        grid-template-columns: repeat(4, 94px);
+        grid-template-rows: repeat(5, 94px);
+        gap: 8px;
+        grid-template-areas:
+        "bracket root power divide"
+        "seven eight nine multiply"
+        "four five six subtract"
+        "one two three add"
+        "decimal zero backspace equals";
+
+        @include calculatorWidth();
+    }
+
+    &__box {
+        // background-color: $light-display-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: $light-button-color-3;
+        border-radius: 30%;
+
+        &--zero {
+            grid-area: zero;
+        }
+        &--one {
+            grid-area: one;
+        }
+        &--two {
+            grid-area: two;
+        }
+        &--three {
+            grid-area: three;
+        }
+        &--four {
+            grid-area: four;
+        }
+        &--five {
+            grid-area: five;
+        }
+        &--six {
+            grid-area: six;
+        }
+        &--seven {
+            grid-area: seven;
+        }
+        &--eight {
+            grid-area: eight;
+        }
+        &--nine {
+            grid-area: nine;
+        }
+        &--decimal {
+            grid-area: decimal;
+            background-color: $light-button-color-2;
+        }
+        &--backspace {
+            grid-area: backspace;
+            background-color: $light-button-color-2;
+        }
+        &--add {
+            grid-area: add;
+            background-color: $light-button-color-2;
+        }
+        &--subtract {
+            grid-area: subtract;
+            background-color: $light-button-color-2;
+        }
+        &--multiply {
+            grid-area: multiply;
+            background-color: $light-button-color-2;
+        }
+        &--divide {
+            grid-area: divide;
+            background-color: $light-button-color-2;
+        }
+        &--bracket {
+            grid-area: bracket;
+            background-color: $light-button-color-2;
+        }
+        &--root {
+            grid-area: root;
+            background-color: $light-button-color-2;
+        }
+        &--power {
+            grid-area: power;
+            background-color: $light-button-color-2;
+        }
+        &--equals {
+            grid-area: equals;
+            background-color: $light-button-color-1;
+        }
+    }
+}

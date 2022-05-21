@@ -1,1 +1,149 @@
-/*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Indie+Flower&family=Pacifico&display=swap");
+.body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+  background-color: #ffdcf3;
+  font-family: "Pacifico", cursive;
+}
+
+@media screen and (max-width: 400px) {
+  .body {
+    max-width: 400px;
+  }
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  height: 8rem;
+  width: 400px;
+  background-color: #eda8c6;
+  border-radius: 8px;
+}
+.header__result {
+  margin: 0 20px;
+}
+.header__result--text {
+  margin: 0;
+  font-size: 24px;
+}
+.header__formula {
+  margin: 0 20px;
+}
+.header__formula--text {
+  margin: 0;
+  font-size: 28px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+.main__panel {
+  display: grid;
+  grid-template-columns: repeat(4, 94px);
+  grid-template-rows: repeat(5, 94px);
+  gap: 8px;
+  grid-template-areas: "bracket root power divide" "seven eight nine multiply" "four five six subtract" "one two three add" "decimal zero backspace equals";
+  width: 400px;
+}
+.main__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6bcd0;
+  border-radius: 30%;
+}
+.main__box--zero {
+  grid-area: zero;
+}
+.main__box--one {
+  grid-area: one;
+}
+.main__box--two {
+  grid-area: two;
+}
+.main__box--three {
+  grid-area: three;
+}
+.main__box--four {
+  grid-area: four;
+}
+.main__box--five {
+  grid-area: five;
+}
+.main__box--six {
+  grid-area: six;
+}
+.main__box--seven {
+  grid-area: seven;
+}
+.main__box--eight {
+  grid-area: eight;
+}
+.main__box--nine {
+  grid-area: nine;
+}
+.main__box--decimal {
+  grid-area: decimal;
+  background-color: #e89bb1;
+}
+.main__box--backspace {
+  grid-area: backspace;
+  background-color: #e89bb1;
+}
+.main__box--add {
+  grid-area: add;
+  background-color: #e89bb1;
+}
+.main__box--subtract {
+  grid-area: subtract;
+  background-color: #e89bb1;
+}
+.main__box--multiply {
+  grid-area: multiply;
+  background-color: #e89bb1;
+}
+.main__box--divide {
+  grid-area: divide;
+  background-color: #e89bb1;
+}
+.main__box--bracket {
+  grid-area: bracket;
+  background-color: #e89bb1;
+}
+.main__box--root {
+  grid-area: root;
+  background-color: #e89bb1;
+}
+.main__box--power {
+  grid-area: power;
+  background-color: #e89bb1;
+}
+.main__box--equals {
+  grid-area: equals;
+  background-color: #dd658b;
+}
+
+.main__button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  height: 94px;
+  width: 94px;
+  border-radius: 30%;
+  font-family: "Pacifico", cursive;
+  font-size: 32px;
+}
+.main__button:hover {
+  background-color: #f13570;
+}/*# sourceMappingURL=style.css.map */

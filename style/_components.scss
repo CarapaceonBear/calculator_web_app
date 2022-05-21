@@ -1,0 +1,21 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.main {
+    &__button {
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+        height: 94px;
+        width: 94px;
+        border-radius: 30%;
+
+        font-family: $primary-font;
+        font-size: $text-buttons;
+
+        
+        &:hover {
+            background-color: $light-button-hover;
+        }
+
+    }
+}
