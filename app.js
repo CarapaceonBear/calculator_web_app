@@ -23,6 +23,9 @@ const buttonPower = document.getElementById("button-power");
 const buttonEquals = document.getElementById("button-equals");
 
 const numberCheck = new RegExp('[0-9]');
+const numberDecimalCheck = new RegExp("[0-9.]");
+const operators = ["^","√","*", "/", "+", "-"];
+const operatorCheck = new RegExp("[^0-9).]");
 let currentResult = null;
 
 console.log("script linked");
@@ -34,6 +37,32 @@ const onButtonClick = (event) => {
     console.log(event.target.value);
     // append value of button to the formula display
     formulaText.innerText += event.target.value;
+}
+
+const onOperatorClicked = (event) => {
+    // TODO support for negative numbers - gonna need to dive back into the calculator
+    moveToMemory();
+    console.log(event.target.value);
+    if (formulaText.innerText.length > 0) {
+        // "√" can't follow itself or "^"
+        if (event.target.value === "√") {
+            if ((formulaText.innerText[formulaText.innerText.length-1] === "√")
+             || (formulaText.innerText[formulaText.innerText.length-1] === "^")) {
+                return;
+            }
+        // the other operators can't directly follow another operator, eg "*/" or "^+""
+        // or an open bracket
+        } else {
+            if (operatorCheck.test(formulaText.innerText[formulaText.innerText.length-1])) {
+                console.log("test2");
+                return;
+            }
+        }
+        formulaText.innerText += event.target.value;
+    // can't start with an operator, except "√" or "-"
+    } else if ((event.target.value === "√") || (event.target.value === "-")) {
+        formulaText.innerText += event.target.value;
+    }
 }
 
 const onEqualsClicked = (event) => {
@@ -64,6 +93,7 @@ const onBackspaceClicked = (event) => {
     .substring(0, formulaText.innerText.length - 1);
     // TO DO if mouse button is held down, fully clear the display
 }
+
 const onBracketClicked = (event) => {
     moveToMemory();
     console.log(event.target.value);
@@ -129,15 +159,15 @@ buttonSix.addEventListener("click", onButtonClick);
 buttonSeven.addEventListener("click", onButtonClick);
 buttonEight.addEventListener("click", onButtonClick);
 buttonNine.addEventListener("click", onButtonClick);
-buttonDecimal.addEventListener("click", onButtonClick);
+buttonDecimal.addEventListener("click", onOperatorClicked);
 buttonBackspace.addEventListener("click", onBackspaceClicked);
-buttonAdd.addEventListener("click", onButtonClick);
-buttonSubtract.addEventListener("click", onButtonClick);
-buttonMultiply.addEventListener("click", onButtonClick);
-buttonDivide.addEventListener("click", onButtonClick);
+buttonAdd.addEventListener("click", onOperatorClicked);
+buttonSubtract.addEventListener("click", onOperatorClicked);
+buttonMultiply.addEventListener("click", onOperatorClicked);
+buttonDivide.addEventListener("click", onOperatorClicked);
 buttonBracket.addEventListener("click", onBracketClicked);
-buttonRoot.addEventListener("click", onButtonClick);
-buttonPower.addEventListener("click", onButtonClick);
+buttonRoot.addEventListener("click", onOperatorClicked);
+buttonPower.addEventListener("click", onOperatorClicked);
 buttonEquals.addEventListener("click", onEqualsClicked);
 
 // -------------------------------------------------------------------------------------------//
@@ -146,10 +176,6 @@ buttonEquals.addEventListener("click", onEqualsClicked);
 // call calculationRunner() to run
 
 let workingFormula = "";
-
-// const numberCheck = new RegExp("[0-9]");
-const numberDecimalCheck = new RegExp("[0-9.]");
-const operators = ["^","√","*", "/", "+", "-"];
 
 let bracketStart = 0;
 let bracketEnd = 0;
