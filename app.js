@@ -30,6 +30,7 @@ resultText.innerText = "";
 formulaText.innerText = "";
 
 const onButtonClick = (event) => {
+    moveToMemory();
     console.log(event.target.value);
     // append value of button to the formula display
     formulaText.innerText += event.target.value;
@@ -38,34 +39,37 @@ const onButtonClick = (event) => {
 const onEqualsClicked = (event) => {
     console.log(event.target.value);
     // if equals button is pressed, run calculation
-    // TO DO
-    // if final character is a functional symbol (eg "+"), don't run
-    // if openBracket is positive, append ")"s until it is 0
+    // if bracketCount is positive, append ")"s until it is 0
+    let bracketCount = countBrackets(formulaText.innerText);
+    console.log(bracketCount);
+    while (bracketCount > 0) {
+        formulaText.innerText += ")";
+        bracketCount --
+    }
+    // check there is something in the formula box
     if (formulaText.innerText.length > 0) {
-        runCalculation(formulaText.innerText);
+        // check that the final character is a number or ")"
+        if ((numberCheck.test(formulaText.innerText[formulaText.innerText.length-1]))
+         || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
+            runCalculation(formulaText.innerText);
+        }
     }
 }
 
 const onBackspaceClicked = (event) => {
+    moveToMemory();
     console.log(event.target.value);
     // if backspace button is pressed, remove last character
     formulaText.innerText = formulaText.innerText
     .substring(0, formulaText.innerText.length - 1);
-    // TO DO IMPORTANT, IF A BRACKET IS REMOVED, MUST UPDATE openBracket
     // TO DO if mouse button is held down, fully clear the display
 }
 const onBracketClicked = (event) => {
+    moveToMemory();
     console.log(event.target.value);
-    // if bracket button ispressed, append an open bracket,
+    // if bracket button is pressed, append an open bracket,
     // if there is already an open bracket, append a closed bracket. 
-    let bracketCount = 0 
-    for (let i = 0; i < formulaText.innerText.length; i++) {
-        if (formulaText.innerText[i] === "(") {
-            bracketCount ++;
-        } else if (formulaText.innerText[i] === ")") {
-            bracketCount --;
-        }
-    }
+    let bracketCount = countBrackets(formulaText.innerText) 
     if (bracketCount == 0) {
         formulaText.innerText += "(";
     } else {
@@ -80,6 +84,18 @@ const onBracketClicked = (event) => {
     }
 }
 
+const countBrackets = (formula) => {
+    let count = 0;
+    for (let i = 0; i < formula.length; i++) {
+        if (formula[i] === "(") {
+            count ++;
+        } else if (formula[i] === ")") {
+            count --;
+        }
+    }
+    return count;
+}
+
 const runCalculation = (formula) => {
     // parses the formula and calculates the result.
     let returnedCalculation = calculationRunner(formula);
@@ -91,12 +107,16 @@ const runCalculation = (formula) => {
     }
     // result is displayed in formula field.
     currentResult = returnedCalculation;
-    // it will also display in result field, after input continues.
-
     formulaText.innerText = currentResult;
-    // temporary, move to onButtonClick later, to be triggered on first 
-    // input after calculation.
-    resultText.innerText = currentResult;
+}
+
+const moveToMemory = () => {
+    // TODO on desktop layout, have a sidebar showing a log of calculations + results
+    // need a panel which is display:none on mobile
+    // just append <p>s containing the results
+    if (currentResult != null) {
+        resultText.innerText = currentResult
+    }
 }
 
 buttonZero.addEventListener("click", onButtonClick);
