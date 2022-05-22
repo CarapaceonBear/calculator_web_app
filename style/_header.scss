@@ -33,3 +33,31 @@
         }
     }
 }
+
+// mobile layout
+@media screen and (max-width:434px) {
+    .header {
+        width: 100%;
+        height: 6rem;
+        &__result {
+            &--text {
+                font-size: $text-display-small--phone;
+            }
+        }
+        &__formula {
+            &--text {
+                font-size: $text-display-large--phone;
+            }
+        }
+    }
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 800px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 801px) {
+
+}

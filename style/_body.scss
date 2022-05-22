@@ -22,9 +22,23 @@
     font-family: $primary-font;
 }
 
-@media screen and (max-width: 400px) {
+// mobile layout
+@media screen and (max-width:434px) {
+    .body {
+        width: 300px;
+        margin: auto;
+    }
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 800px) {
     .body {
         max-width: 400px;
+        margin: auto;
     }
+}
+
+// desktop layout
+@media screen and (min-width: 801px) {
 
 }

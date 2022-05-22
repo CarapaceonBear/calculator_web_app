@@ -19,3 +19,24 @@
 
     }
 }
+
+// mobile layout
+@media screen and (max-width:434px) {
+    .main {
+        &__button {
+            height: 69px;
+            width: 69px;
+            font-size: $text-buttons--phone;
+        }
+    }
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 800px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 801px) {
+
+}

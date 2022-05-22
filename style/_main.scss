@@ -101,3 +101,25 @@
         }
     }
 }
+
+// mobile layout
+@media screen and (max-width:434px) {
+    .main {
+        width: 100%;
+
+        &__panel {
+            grid-template-columns: repeat(4, 69px);
+            grid-template-rows: repeat(5, 69px);
+        }
+    }
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 800px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 801px) {
+
+}
