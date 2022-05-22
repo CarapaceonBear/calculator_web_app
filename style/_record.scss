@@ -3,6 +3,31 @@
 
 .record {
     display: none;
+
+    max-height: 650px;
+
+    &__text {
+        height: 1rem;
+        margin: 0;
+        &--formula {
+            font-size: $text-display-small--phone;
+            height: 2rem;
+            margin: 0 0 0 1rem;
+        }
+        &--result {
+            font-size: $text-display-large--phone;
+            height: 2rem;
+            margin: 0 0 0 1rem;
+        }
+    }
+}
+::-webkit-scrollbar {
+    background-color: $light-button-color-3;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: $light-button-color-1;
+    border-radius: 6px;
 }
 
 
@@ -24,8 +49,8 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        gap: 5px;
         width: 400px;
+        overflow: auto;
 
         border: 1px solid $light-button-color-1;
         border-radius: 8px;

@@ -1,5 +1,6 @@
 const resultText = document.getElementById("result-text");
 const formulaText = document.getElementById("formula-text");
+const recordBox = document.getElementById("record-box");
 
 const buttonZero = document.getElementById("button-zero");
 const buttonOne = document.getElementById("button-one");
@@ -132,12 +133,14 @@ const runCalculation = (formula) => {
     //   this is handled by calculator.js and returned
     // (if the result is no different from the formula, 
     //  eg if the 'formula' is just '4', then return nothing)
-    if (currentResult === returnedCalculation) {
+    if (formulaText.innerText === returnedCalculation) {
         return;
     }
     // result is displayed in formula field.
     currentResult = returnedCalculation;
     formulaText.innerText = currentResult;
+    // on desktop, add to the record box
+    addToRecord(formula, returnedCalculation);
 }
 
 const moveToMemory = () => {
@@ -147,6 +150,10 @@ const moveToMemory = () => {
     if (currentResult != null) {
         resultText.innerText = currentResult
     }
+}
+
+const addToRecord = (formula, result) => {
+    recordBox.innerHTML += `<p class="record__text"></p><p class="record__text--formula">${formula}</p><p class="record__text--result">${result}</p>`;
 }
 
 buttonZero.addEventListener("click", onButtonClick);

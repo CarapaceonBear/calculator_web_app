@@ -180,6 +180,31 @@
 }
 .record {
   display: none;
+  max-height: 650px;
+}
+.record__text {
+  height: 1rem;
+  margin: 0;
+}
+.record__text--formula {
+  font-size: 26px;
+  height: 2rem;
+  margin: 0 0 0 1rem;
+}
+.record__text--result {
+  font-size: 32px;
+  height: 2rem;
+  margin: 0 0 0 1rem;
+}
+
+::-webkit-scrollbar {
+  background-color: #f6bcd0;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dd658b;
+  border-radius: 6px;
 }
 
 @media screen and (min-width: 851px) {
@@ -188,8 +213,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 5px;
     width: 400px;
+    overflow: auto;
     border: 1px solid #dd658b;
     border-radius: 8px;
   }
