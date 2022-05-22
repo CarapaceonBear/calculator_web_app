@@ -4,7 +4,7 @@
 .header {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     // gap: 2px;
     align-items: flex-end;
     height: 8rem;
@@ -16,6 +16,7 @@
 
     &__result {
         margin: 0 20px;
+        height: 30%;
 
         &--text {
             margin: 0;
@@ -24,6 +25,8 @@
     }
     &__formula {
         margin: 0 20px;
+        height: 30%;
+        
         &--text {
             margin: 0;
             font-size: $text-display-large;
