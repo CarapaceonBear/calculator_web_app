@@ -3,3 +3,9 @@
 @mixin calculatorWidth() {
     width: 400px;
 }
+
+@mixin flexCenter() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

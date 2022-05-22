@@ -1,6 +1,8 @@
 const resultText = document.getElementById("result-text");
 const formulaText = document.getElementById("formula-text");
 const recordBox = document.getElementById("record-box");
+const darkModeButton = document.getElementById("dark-mode-button");
+const lightModeButton = document.getElementById("light-mode-button");
 
 const buttonZero = document.getElementById("button-zero");
 const buttonOne = document.getElementById("button-one");
@@ -202,11 +204,11 @@ const calculationRunner = (overallCalculation) => {
         // check for directly preceding/following numbers or brackets
         if ((numberCheck.test(workingFormula[bracketStart-1]))
          || (workingFormula[bracketStart-1] == ")")) {
-            segmentResult = `*${segmentResult}`;
-        }
-        if ((numberCheck.test(workingFormula[bracketEnd+1]))
-         || (workingFormula[bracketEnd+1] == "(")) {
-            segmentResult = `${segmentResult}*`;
+             segmentResult = `*${segmentResult}`;
+            }
+            if ((numberCheck.test(workingFormula[bracketEnd+1]))
+            || (workingFormula[bracketEnd+1] == "(")) {
+                segmentResult = `${segmentResult}*`;
         }
         // replace the calculated result in place of the bracket segment
         // .replace() won't do it, need to concat "slice before segment"+"result"+"slice after segment"
@@ -231,21 +233,21 @@ const performCalculation = (segment) => {
         };
         // run the calculation that many times, passing in the specific operator
         for (let j = 1; j <= currentCount; j++) {
-
+            
             let basicResult = calculateBasic(workingSegment, operator);
-           
+            
             if (operator === "√") {
                 // if a number directly precedes, insert "*"
                 if (numberCheck.test(workingSegment[preceder-1])) {
                     basicResult = `*${basicResult}`;
                 }
             }
-
+            
             workingSegment = 
             `${workingSegment.slice(0, preceder)}${basicResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
         };
     });
-
+    
     return (workingSegment);
 }
 
@@ -289,7 +291,7 @@ const calculateBasic = (segment, symbol) => {
             break;
         }
     }  
-
+    
     // grab the relevant numbers from the segment
     if (operator === "√") {
         // for roots specifically, just need the numbers after
@@ -303,17 +305,42 @@ const calculateBasic = (segment, symbol) => {
     switch(operator) {
         case "^":
             return Math.pow(preNumber, postNumber);
-        case "√":
-            return Math.sqrt(postNumber);
-        case "*":
-            return (preNumber * postNumber);
-        case "/":
-            return (preNumber / postNumber);
-        case "+":
-            return (preNumber + postNumber);
-        case "-":
-            return (preNumber - postNumber);
+            case "√":
+                return Math.sqrt(postNumber);
+                case "*":
+                    return (preNumber * postNumber);
+                    case "/":
+                        return (preNumber / postNumber);
+                        case "+":
+                            return (preNumber + postNumber);
+                            case "-":
+                                return (preNumber - postNumber);
         default:
             return null;
+        }
     }
-}
+
+    // -------------------------------------------------------------------------------------------//
+    // ------------------------------------ COLOUR MODE ------------------------------------------//
+    // -------------------------------------------------------------------------------------------//
+    const body = document.getElementById("body");
+    
+    
+    const onLightModeClicked = () => {
+        lightModeButton.classList.add("hide-button");
+        darkModeButton.classList.remove("hide-button");
+
+        body.classList.add("body--light");
+    }
+    
+    const onDarkModeClicked = () => {
+        darkModeButton.classList.add("hide-button");
+        lightModeButton.classList.remove("hide-button");
+
+        body.classList.remove("body--light");
+};
+    
+
+
+lightModeButton.addEventListener("click", onLightModeClicked);
+darkModeButton.addEventListener("click", onDarkModeClicked);

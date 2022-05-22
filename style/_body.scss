@@ -10,7 +10,11 @@
 	font: inherit;
 	vertical-align: baseline;
     //
-    background-color: $light-background-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: $dark-background-color;
 
     font-family: $primary-font;
 }

@@ -1,0 +1,12 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.hide-button {
+    display: none;
+}
+
+.body {
+    &--light {
+        background-color: $light-background-color;
+    }
+}

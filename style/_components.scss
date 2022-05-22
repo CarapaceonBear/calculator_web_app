@@ -19,6 +19,24 @@
 
     }
 }
+
+.nav {
+    &__colour-mode {
+        &--button {
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            
+            &:hover {
+                background-color: $light-button-hover;
+            }
+        }
+    }
+}
+
+
 ::-webkit-scrollbar {
     background-color: $light-button-color-3;
     border-radius: 6px;

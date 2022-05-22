@@ -7,11 +7,19 @@
     <title>Calculator WebApp</title>
     <link rel="stylesheet" href="./style/style.css">
     <script defer src="./app.js"></script>
+    <script src="https://kit.fontawesome.com/b108659fdc.js" crossorigin="anonymous"></script>
 </head>
-<body class="body">
+<body class="body" id="body">
     <nav class="nav">
-        <!-- currently empty, may include option for light/dark mode, link to my github
-        or inline CV -->
+        <div class="nav__colour-mode">
+            <button class="nav__colour-mode--button hide-button" id="dark-mode-button">
+                <i class="fa-solid fa-moon fa-xl"></i>
+            </button>
+            <button class="nav__colour-mode--button" id="light-mode-button">
+                <i class="fa-solid fa-sun fa-xl"></i>
+            </button>
+        </div>
+
     </nav>
 
     <section class = full-display>
@@ -19,12 +27,12 @@
             <header class="header">
                 <div class="header__result">
                     <p class="header__result--text" id="result-text">
-                        placeholder - result
+                        
                     </p>
                 </div>
                 <div class="header__formula">
                     <p class="header__formula--text" id="formula-text">
-                        placeholder - formula
+                    
                     </p>
                 </div>
             </header>
