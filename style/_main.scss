@@ -20,6 +20,7 @@
         @include calculatorWidth();
     }
 
+    // grid layout
     &__box {
         // background-color: $light-display-color;
         display: flex;
@@ -115,11 +116,11 @@
 }
 
 // tablet layout
-@media screen and (min-width: 435px) and (max-width: 800px) {
+@media screen and (min-width: 435px) and (max-width: 850px) {
 
 }
 
 // desktop layout
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 851px) {
 
 }

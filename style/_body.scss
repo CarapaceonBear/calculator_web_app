@@ -10,13 +10,6 @@
 	font: inherit;
 	vertical-align: baseline;
     //
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 20px;
-    align-items: center;
-
     background-color: $light-background-color;
 
     font-family: $primary-font;
@@ -24,21 +17,15 @@
 
 // mobile layout
 @media screen and (max-width:434px) {
-    .body {
-        width: 300px;
-        margin: auto;
-    }
+
 }
 
 // tablet layout
-@media screen and (min-width: 435px) and (max-width: 800px) {
-    .body {
-        max-width: 400px;
-        margin: auto;
-    }
+@media screen and (min-width: 435px) and (max-width: 850px) {
+
 }
 
 // desktop layout
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 851px) {
 
 }

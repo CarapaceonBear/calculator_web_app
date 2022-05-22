@@ -6,25 +6,38 @@
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  background-color: #ffdcf3;
+  font-family: "Pacifico", cursive;
+}
+
+.full-display {
+  display: flex;
+  justify-content: space-between;
+  width: 850px;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.calculator {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 20px;
   align-items: center;
-  background-color: #ffdcf3;
-  font-family: "Pacifico", cursive;
 }
 
 @media screen and (max-width: 434px) {
-  .body {
+  .full-display {
     width: 300px;
-    margin: auto;
+  }
+
+  .calculator {
+    width: 300px;
   }
 }
-@media screen and (min-width: 435px) and (max-width: 800px) {
-  .body {
+@media screen and (min-width: 435px) and (max-width: 850px) {
+  .full-display {
     max-width: 400px;
-    margin: auto;
   }
 }
 .header {
@@ -163,6 +176,22 @@
   .main__panel {
     grid-template-columns: repeat(4, 69px);
     grid-template-rows: repeat(5, 69px);
+  }
+}
+.record {
+  display: none;
+}
+
+@media screen and (min-width: 851px) {
+  .record {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+    width: 400px;
+    border: 1px solid #dd658b;
+    border-radius: 8px;
   }
 }
 .main__button {

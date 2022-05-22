@@ -1,0 +1,33 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.record {
+    display: none;
+}
+
+
+
+// mobile layout
+@media screen and (max-width:434px) {
+
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 850px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 851px) {
+    .record {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 5px;
+        width: 400px;
+
+        border: 1px solid $light-button-color-1;
+        border-radius: 8px;
+    }
+}
