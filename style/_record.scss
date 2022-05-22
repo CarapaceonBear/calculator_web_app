@@ -21,16 +21,6 @@
         }
     }
 }
-::-webkit-scrollbar {
-    background-color: $light-button-color-3;
-    border-radius: 6px;
-}
-::-webkit-scrollbar-thumb {
-    background: $light-button-color-1;
-    border-radius: 6px;
-}
-
-
 
 // mobile layout
 @media screen and (max-width:434px) {
@@ -48,6 +38,8 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        // flex-direction: column-reverse;
+        // justify-content: flex-end;
         align-items: flex-start;
         width: 400px;
         overflow: auto;

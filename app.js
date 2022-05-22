@@ -41,7 +41,6 @@ const onButtonClick = (event) => {
 }
 
 const onOperatorClicked = (event) => {
-    // TODO support for negative numbers - gonna need to dive back into the calculator
     moveToMemory();
     console.log(event.target.value);
     if (formulaText.innerText.length > 0) {
@@ -92,7 +91,6 @@ const onBackspaceClicked = (event) => {
     // if backspace button is pressed, remove last character
     formulaText.innerText = formulaText.innerText
     .substring(0, formulaText.innerText.length - 1);
-    // TO DO if mouse button is held down, fully clear the display
 }
 
 const onBracketClicked = (event) => {
@@ -144,9 +142,6 @@ const runCalculation = (formula) => {
 }
 
 const moveToMemory = () => {
-    // TODO on desktop layout, have a sidebar showing a log of calculations + results
-    // need a panel which is display:none on mobile
-    // just append <p>s containing the results
     if (currentResult != null) {
         resultText.innerText = currentResult
     }

@@ -19,6 +19,14 @@
 
     }
 }
+::-webkit-scrollbar {
+    background-color: $light-button-color-3;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: $light-button-color-1;
+    border-radius: 6px;
+}
 
 // mobile layout
 @media screen and (max-width:434px) {

@@ -46,6 +46,7 @@
   justify-content: flex-start;
   align-items: flex-end;
   height: 8rem;
+  overflow: auto;
   width: 400px;
   background-color: #eda8c6;
   border-radius: 8px;
@@ -197,16 +198,6 @@
   margin: 0 0 0 1rem;
 }
 
-::-webkit-scrollbar {
-  background-color: #f6bcd0;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #dd658b;
-  border-radius: 6px;
-}
-
 @media screen and (min-width: 851px) {
   .record {
     display: flex;
@@ -230,6 +221,16 @@
 }
 .main__button:hover {
   background-color: #f13570;
+}
+
+::-webkit-scrollbar {
+  background-color: #f6bcd0;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dd658b;
+  border-radius: 6px;
 }
 
 @media screen and (max-width: 434px) {
