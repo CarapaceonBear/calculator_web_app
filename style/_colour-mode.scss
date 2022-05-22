@@ -10,3 +10,37 @@
         background-color: $light-background-color;
     }
 }
+.nav {
+    &__colour-mode {
+        &--light {
+            background-color: $light-button-color-3;
+        }
+    }
+}
+.header {
+    &--light {
+        background-color: $light-display-color;
+        color: $light-text-color;
+    }
+}
+.main {
+    &__box {
+        &--light1 {
+            background-color: $light-button-color-1;
+        }
+        &--light2 {
+            background-color: $light-button-color-2;
+        }
+        &--light3 {
+            background-color: $light-button-color-3;
+        }
+    }
+    &__button {
+        &--light {
+            color: $light-text-color;
+            &:hover {
+                background-color: $light-button-hover;
+            }
+        }
+    }
+}

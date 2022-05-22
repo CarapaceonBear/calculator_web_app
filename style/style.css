@@ -21,7 +21,7 @@
   margin-top: 1rem;
 }
 .nav__colour-mode {
-  background-color: #f6bcd0;
+  background-color: #ba94b7;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -78,8 +78,9 @@
   height: 8rem;
   overflow: auto;
   width: 400px;
-  background-color: #eda8c6;
+  background-color: #6f5f6e;
   border-radius: 8px;
+  color: #ffdcf3;
 }
 .header__result {
   margin: 0 20px;
@@ -126,8 +127,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f6bcd0;
+  background-color: #ba94b7;
   border-radius: 30%;
+}
+.main__box--colour1 {
+  background-color: #91528c;
+}
+.main__box--colour2 {
+  background-color: #a776a3;
 }
 .main__box--zero {
   grid-area: zero;
@@ -161,43 +168,33 @@
 }
 .main__box--decimal {
   grid-area: decimal;
-  background-color: #e89bb1;
 }
 .main__box--backspace {
   grid-area: backspace;
-  background-color: #e89bb1;
 }
 .main__box--add {
   grid-area: add;
-  background-color: #e89bb1;
 }
 .main__box--subtract {
   grid-area: subtract;
-  background-color: #e89bb1;
 }
 .main__box--multiply {
   grid-area: multiply;
-  background-color: #e89bb1;
 }
 .main__box--divide {
   grid-area: divide;
-  background-color: #e89bb1;
 }
 .main__box--bracket {
   grid-area: bracket;
-  background-color: #e89bb1;
 }
 .main__box--root {
   grid-area: root;
-  background-color: #e89bb1;
 }
 .main__box--power {
   grid-area: power;
-  background-color: #e89bb1;
 }
 .main__box--equals {
   grid-area: equals;
-  background-color: #dd658b;
 }
 
 @media screen and (max-width: 434px) {
@@ -248,9 +245,10 @@
   border-radius: 30%;
   font-family: "Pacifico", cursive;
   font-size: 32px;
+  color: #ffdcf3;
 }
 .main__button:hover {
-  background-color: #f13570;
+  background-color: #98158d;
 }
 
 .nav__colour-mode--button {
@@ -287,4 +285,29 @@
 
 .body--light {
   background-color: #ffdcf3;
+}
+
+.nav__colour-mode--light {
+  background-color: #f6bcd0;
+}
+
+.header--light {
+  background-color: #eda8c6;
+  color: #1f081d;
+}
+
+.main__box--light1 {
+  background-color: #dd658b;
+}
+.main__box--light2 {
+  background-color: #e89bb1;
+}
+.main__box--light3 {
+  background-color: #f6bcd0;
+}
+.main__button--light {
+  color: #1f081d;
+}
+.main__button--light:hover {
+  background-color: #f13570;
 }/*# sourceMappingURL=style.css.map */

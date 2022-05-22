@@ -1,8 +1,6 @@
 const resultText = document.getElementById("result-text");
 const formulaText = document.getElementById("formula-text");
 const recordBox = document.getElementById("record-box");
-const darkModeButton = document.getElementById("dark-mode-button");
-const lightModeButton = document.getElementById("light-mode-button");
 
 const buttonZero = document.getElementById("button-zero");
 const buttonOne = document.getElementById("button-one");
@@ -50,18 +48,18 @@ const onOperatorClicked = (event) => {
         if (event.target.value === "√") {
             if ((formulaText.innerText[formulaText.innerText.length-1] === "√")
              || (formulaText.innerText[formulaText.innerText.length-1] === "^")) {
-                return;
-            }
-        // the other operators can't directly follow another operator, eg "*/" or "^+""
-        // or an open bracket
-        } else {
-            if (operatorCheck.test(formulaText.innerText[formulaText.innerText.length-1])) {
-                console.log("test2");
-                return;
-            }
+                 return;
+                }
+                // the other operators can't directly follow another operator, eg "*/" or "^+""
+                // or an open bracket
+            } else {
+                if (operatorCheck.test(formulaText.innerText[formulaText.innerText.length-1])) {
+                    console.log("test2");
+                    return;
+                }
         }
         formulaText.innerText += event.target.value;
-    // can't start with an operator, except "√" or "-"
+        // can't start with an operator, except "√" or "-"
     } else if ((event.target.value === "√") || (event.target.value === "-")) {
         formulaText.innerText += event.target.value;
     }
@@ -81,7 +79,7 @@ const onEqualsClicked = (event) => {
     if (formulaText.innerText.length > 0) {
         // check that the final character is a number or ")"
         if ((numberCheck.test(formulaText.innerText[formulaText.innerText.length-1]))
-         || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
+        || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
             runCalculation(formulaText.innerText);
         }
     }
@@ -107,7 +105,7 @@ const onBracketClicked = (event) => {
         // check if current final character is a number, or ")",
         // if not, open another bracket.
         if ((numberCheck.test(formulaText.innerText[formulaText.innerText.length-1]))
-         || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
+        || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
             formulaText.innerText += ")";
         } else {
             formulaText.innerText += "(";
@@ -203,12 +201,12 @@ const calculationRunner = (overallCalculation) => {
         let segmentResult = bracketSegmenter(workingFormula);
         // check for directly preceding/following numbers or brackets
         if ((numberCheck.test(workingFormula[bracketStart-1]))
-         || (workingFormula[bracketStart-1] == ")")) {
-             segmentResult = `*${segmentResult}`;
-            }
-            if ((numberCheck.test(workingFormula[bracketEnd+1]))
-            || (workingFormula[bracketEnd+1] == "(")) {
-                segmentResult = `${segmentResult}*`;
+        || (workingFormula[bracketStart-1] == ")")) {
+            segmentResult = `*${segmentResult}`;
+        }
+        if ((numberCheck.test(workingFormula[bracketEnd+1]))
+        || (workingFormula[bracketEnd+1] == "(")) {
+            segmentResult = `${segmentResult}*`;
         }
         // replace the calculated result in place of the bracket segment
         // .replace() won't do it, need to concat "slice before segment"+"result"+"slice after segment"
@@ -315,22 +313,93 @@ const calculateBasic = (segment, symbol) => {
                             return (preNumber + postNumber);
                             case "-":
                                 return (preNumber - postNumber);
-        default:
-            return null;
+                                default:
+                                    return null;
         }
     }
-
+    
     // -------------------------------------------------------------------------------------------//
     // ------------------------------------ COLOUR MODE ------------------------------------------//
     // -------------------------------------------------------------------------------------------//
+   
+    const darkModeButton = document.getElementById("dark-mode-button");
+    const lightModeButton = document.getElementById("light-mode-button");
     const body = document.getElementById("body");
-    
+    const colourMode = document.getElementById("colour-mode");
+
+    const boxZero = document.getElementById("box-zero");
+    const boxOne = document.getElementById("box-one");
+    const boxTwo = document.getElementById("box-two");
+    const boxThree = document.getElementById("box-three");
+    const header = document.getElementById("header");
+    const boxFour = document.getElementById("box-four");
+    const boxFive = document.getElementById("box-five");
+    const boxSix = document.getElementById("box-six");
+    const boxSeven = document.getElementById("box-seven");
+    const boxEight = document.getElementById("box-eight");
+    const boxNine = document.getElementById("box-nine");
+    const boxDecimal = document.getElementById("box-decimal");
+    const boxBackspace = document.getElementById("box-backspace");
+    const boxAdd = document.getElementById("box-add");
+    const boxSubtract = document.getElementById("box-subtract");
+    const boxMultiply = document.getElementById("box-multiply");
+    const boxDivide = document.getElementById("box-divide");
+    const boxBracket = document.getElementById("box-bracket");
+    const boxRoot = document.getElementById("box-root");
+    const boxPower = document.getElementById("box-power");
+    const boxEquals = document.getElementById("box-equals");
+
     
     const onLightModeClicked = () => {
         lightModeButton.classList.add("hide-button");
         darkModeButton.classList.remove("hide-button");
 
         body.classList.add("body--light");
+        colourMode.classList.add("colour-mode--light");
+        header.classList.add("header--light");
+
+        boxZero.classList.add("main__box--light3");
+        boxOne.classList.add("main__box--light3");
+        boxTwo.classList.add("main__box--light3");
+        boxThree.classList.add("main__box--light3");
+        boxFour.classList.add("main__box--light3");
+        boxFive.classList.add("main__box--light3");
+        boxSix.classList.add("main__box--light3");
+        boxSeven.classList.add("main__box--light3");
+        boxEight.classList.add("main__box--light3");
+        boxNine .classList.add("main__box--light3");
+        boxDecimal.classList.add("main__box--light2");
+        boxBackspace.classList.add("main__box--light2");
+        boxAdd .classList.add("main__box--light2");
+        boxSubtract.classList.add("main__box--light2");
+        boxMultiply.classList.add("main__box--light2");
+        boxDivide.classList.add("main__box--light2");
+        boxBracket.classList.add("main__box--light2");
+        boxRoot .classList.add("main__box--light2");
+        boxPower.classList.add("main__box--light2");
+        boxEquals.classList.add("main__box--light1");
+
+        buttonZero.classList.add("main__button--light");
+        buttonOne.classList.add("main__button--light");
+        buttonTwo.classList.add("main__button--light");
+        buttonThree.classList.add("main__button--light");
+        buttonFour.classList.add("main__button--light");
+        buttonFive.classList.add("main__button--light");
+        buttonSix.classList.add("main__button--light");
+        buttonSeven.classList.add("main__button--light");
+        buttonEight.classList.add("main__button--light");
+        buttonNine .classList.add("main__button--light");
+        buttonDecimal.classList.add("main__button--light");
+        buttonBackspace.classList.add("main__button--light");
+        buttonAdd.classList.add("main__button--light");
+        buttonSubtract.classList.add("main__button--light");
+        buttonMultiply.classList.add("main__button--light");
+        buttonDivide.classList.add("main__button--light");
+        buttonBracket.classList.add("main__button--light");
+        buttonRoot .classList.add("main__button--light");
+        buttonPower.classList.add("main__button--light");
+        buttonEquals.classList.add("main__button--light");
+        
     }
     
     const onDarkModeClicked = () => {
@@ -338,6 +407,51 @@ const calculateBasic = (segment, symbol) => {
         lightModeButton.classList.remove("hide-button");
 
         body.classList.remove("body--light");
+        colourMode.classList.remove("colour-mode--light");
+        header.classList.remove("header--light");
+
+        boxZero.classList.remove("main__box--light3");
+        boxOne.classList.remove("main__box--light3");
+        boxTwo.classList.remove("main__box--light3");
+        boxThree.classList.remove("main__box--light3");
+        boxFour.classList.remove("main__box--light3");
+        boxFive.classList.remove("main__box--light3");
+        boxSix.classList.remove("main__box--light3");
+        boxSeven.classList.remove("main__box--light3");
+        boxEight.classList.remove("main__box--light3");
+        boxNine .classList.remove("main__box--light3");
+        boxDecimal.classList.remove("main__box--light2");
+        boxBackspace.classList.remove("main__box--light2");
+        boxAdd .classList.remove("main__box--light2");
+        boxSubtract.classList.remove("main__box--light2");
+        boxMultiply.classList.remove("main__box--light2");
+        boxDivide.classList.remove("main__box--light2");
+        boxBracket.classList.remove("main__box--light2");
+        boxRoot .classList.remove("main__box--light2");
+        boxPower.classList.remove("main__box--light2");
+        boxEquals.classList.remove("main__box--light1");
+
+        buttonZero.classList.remove("main__button--light");
+        buttonOne.classList.remove("main__button--light");
+        buttonTwo.classList.remove("main__button--light");
+        buttonThree.classList.remove("main__button--light");
+        buttonFour.classList.remove("main__button--light");
+        buttonFive.classList.remove("main__button--light");
+        buttonSix.classList.remove("main__button--light");
+        buttonSeven.classList.remove("main__button--light");
+        buttonEight.classList.remove("main__button--light");
+        buttonNine .classList.remove("main__button--light");
+        buttonDecimal.classList.remove("main__button--light");
+        buttonBackspace.classList.remove("main__button--light");
+        buttonAdd.classList.remove("main__button--light");
+        buttonSubtract.classList.remove("main__button--light");
+        buttonMultiply.classList.remove("main__button--light");
+        buttonDivide.classList.remove("main__button--light");
+        buttonBracket.classList.remove("main__button--light");
+        buttonRoot .classList.remove("main__button--light");
+        buttonPower.classList.remove("main__button--light");
+        buttonEquals.classList.remove("main__button--light");
+        
 };
     
 

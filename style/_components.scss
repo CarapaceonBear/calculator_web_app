@@ -12,9 +12,10 @@
         font-family: $primary-font;
         font-size: $text-buttons;
 
+        color: $dark-text-color;
         
         &:hover {
-            background-color: $light-button-hover;
+            background-color: $dark-button-hover;
         }
 
     }

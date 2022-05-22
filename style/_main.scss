@@ -27,9 +27,15 @@
         justify-content: center;
         align-items: center;
 
-        background-color: $light-button-color-3;
+        background-color: $dark-button-color-3;
         border-radius: 30%;
 
+        &--colour1 {
+            background-color: $dark-button-color-1;
+        }
+        &--colour2 {
+            background-color: $dark-button-color-2;
+        }
         &--zero {
             grid-area: zero;
         }
@@ -62,43 +68,33 @@
         }
         &--decimal {
             grid-area: decimal;
-            background-color: $light-button-color-2;
         }
         &--backspace {
             grid-area: backspace;
-            background-color: $light-button-color-2;
         }
         &--add {
             grid-area: add;
-            background-color: $light-button-color-2;
         }
         &--subtract {
             grid-area: subtract;
-            background-color: $light-button-color-2;
         }
         &--multiply {
             grid-area: multiply;
-            background-color: $light-button-color-2;
         }
         &--divide {
             grid-area: divide;
-            background-color: $light-button-color-2;
         }
         &--bracket {
             grid-area: bracket;
-            background-color: $light-button-color-2;
         }
         &--root {
             grid-area: root;
-            background-color: $light-button-color-2;
         }
         &--power {
             grid-area: power;
-            background-color: $light-button-color-2;
         }
         &--equals {
             grid-area: equals;
-            background-color: $light-button-color-1;
         }
     }
 }
