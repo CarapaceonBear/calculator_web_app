@@ -1,6 +1,4 @@
 Record Box : try to get scrolling to work when flex is reversed
 Display : get a scrollbar on overflow
 Calculator : allow understanding of negative numbers vs subtraction operator
-Buttons : change out for a backspace icon
-Nav : add link to repo
-Longpress on mobile - disallow context menu
+Longpress on mobile : disallow context menu

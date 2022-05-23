@@ -24,7 +24,7 @@ const buttonPower = document.getElementById("button-power");
 const buttonEquals = document.getElementById("button-equals");
 
 const numberCheck = new RegExp('[0-9]');
-const numberDecimalCheck = new RegExp("[0-9.]");
+const numberDecimalCheck = new RegExp("[n0-9.]");
 const operators = ["^","√","×", "÷", "+", "-"];
 const operatorCheck = new RegExp("[^0-9).]");
 let currentResult = null;
@@ -43,6 +43,7 @@ const onButtonClick = (event) => {
 }
 
 const onOperatorClicked = (event) => {
+    // ( "-" is not included here, because it can follow any operator)
     moveToMemory();
     console.log(event.target.value);
     if (formulaText.innerText.length > 0) {
@@ -61,8 +62,8 @@ const onOperatorClicked = (event) => {
                 }
         }
         formulaText.innerText += event.target.value;
-        // can't start with an operator, except "√" or "-"
-    } else if ((event.target.value === "√") || (event.target.value === "-")) {
+        // can't start with an operator, except "√"
+    } else if (event.target.value === "√") {
         formulaText.innerText += event.target.value;
     }
 }
@@ -180,7 +181,7 @@ buttonNine.addEventListener("click", onButtonClick);
 buttonDecimal.addEventListener("click", onOperatorClicked);
 buttonBackspace.addEventListener("click", onBackspaceClicked);
 buttonAdd.addEventListener("click", onOperatorClicked);
-buttonSubtract.addEventListener("click", onOperatorClicked);
+buttonSubtract.addEventListener("click", onButtonClick);
 buttonMultiply.addEventListener("click", onOperatorClicked);
 buttonDivide.addEventListener("click", onOperatorClicked);
 buttonBracket.addEventListener("click", onBracketClicked);
@@ -239,37 +240,6 @@ const calculationRunner = (overallCalculation) => {
     return(performCalculation(workingFormula));
 };
 
-const performCalculation = (segment) => {
-    let workingSegment = segment
-    // perform the calculation process for each operator in sequence
-    operators.forEach((operator) => {
-        // count how many of the given operator there are
-        currentCount = 0;
-        for (let i = 0; i < workingSegment.length; i++) {
-            if (workingSegment[i] == operator) {
-                currentCount ++;
-            };
-        };
-        // run the calculation that many times, passing in the specific operator
-        for (let j = 1; j <= currentCount; j++) {
-            
-            let basicResult = calculateBasic(workingSegment, operator);
-            
-            if (operator === "√") {
-                // if a number directly precedes, insert "*"
-                if (numberCheck.test(workingSegment[preceder-1])) {
-                    basicResult = `×${basicResult}`;
-                }
-            }
-            
-            workingSegment = 
-            `${workingSegment.slice(0, preceder)}${basicResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
-        };
-    });
-    
-    return (workingSegment);
-}
-
 const bracketSegmenter = (formula) => {
     // select the bracket segment for calculation
     for (let i = formula.length; i >= 0; i--) {
@@ -288,6 +258,59 @@ const bracketSegmenter = (formula) => {
     console.log(`bracketSegment = ${bracketSegment}`);
     return performCalculation(bracketSegment);
 }
+
+const performCalculation = (segment) => {
+    // first step, parse negative numbers, swap in "n". Eg "-6" -> "n6"
+    // this allows the segments to differentiate between subtraction and negative numbers
+    let workingSegment = parseNegativeNumbers(segment);
+    // perform the calculation process for each operator in sequence
+    operators.forEach((operator) => {
+        // count how many of the given operator there are
+        currentCount = 0;
+        for (let i = 0; i < workingSegment.length; i++) {
+            if (workingSegment[i] == operator) {
+                currentCount ++;
+            };
+        };
+        // run the calculation that many times, passing in the specific operator
+        for (let j = 1; j <= currentCount; j++) {
+            
+            let basicResult = calculateBasic(workingSegment, operator);
+            console.log(`basic result ${basicResult}`);
+            
+            if (operator === "√") {
+                // if a number directly precedes, insert "*"
+                if (numberCheck.test(workingSegment[preceder-1])) {
+                    basicResult = `×${basicResult}`;
+                }
+            }
+            
+            workingSegment = 
+            `${workingSegment.slice(0, preceder)}${basicResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
+        };
+    });
+    
+    return (workingSegment);
+}
+
+const parseNegativeNumbers = (segment) => {
+    let negativeSegment = segment;
+    if (negativeSegment == null) {
+        return negativeSegment;
+    }
+    for (let i = 0; i < negativeSegment.length; i++) {
+        if (negativeSegment[i] === "-") {
+            if (i === 0) {
+                negativeSegment = `n${negativeSegment.slice(1, negativeSegment.length)}`;
+            } else if (! numberCheck.test(negativeSegment[i-1])) {
+                negativeSegment = `${negativeSegment.slice(0, i)}n${negativeSegment.slice(i+1, negativeSegment.length)}`;
+            }
+        }
+    }
+    console.log(negativeSegment);
+    return negativeSegment;
+}
+
 
 const calculateBasic = (segment, symbol) => {
     let operator = symbol;
@@ -317,26 +340,64 @@ const calculateBasic = (segment, symbol) => {
         // however, need to update this to slice the result back in
         preceder = operatorIndex;
     }
-    
-    let preNumber = parseFloat(segment.slice(preceder, operatorIndex));
-    let postNumber = parseFloat(segment.slice(operatorIndex+1, follower+1));
+    let preNumber = segment.slice(preceder, operatorIndex);
+    console.log(`preNumber : ${preNumber}`);
+    let postNumber = segment.slice(operatorIndex+1, follower+1);
+    console.log(`postNumber : ${postNumber}`);
+
+    // swap out "n" for "-", to return negative numbers for calculation
+
+    for (let i = 0; i < preNumber.length; i++) {
+        if (preNumber[i] === "n") {
+            if (i == 0) {
+                preNumber = `-${preNumber.slice(1, preNumber.length)}`;
+            } else {
+                preNumber = `${preNumber.slice(0, i)}-${preNumber.slice(i+1, preNumber.length)}`;
+            }
+        }
+    }
+    preNumber = parseFloat(preNumber);
+    for (let i = 0; i < postNumber.length; i++) {
+        if (postNumber[i] === "n") {
+            if (i == 0) {
+                postNumber = `-${postNumber.slice(1, postNumber.length)}`;
+            } else {
+                postNumber = `${postNumber.slice(0, i)}-${postNumber.slice(i+1, postNumber.length)}`;
+            }
+        }
+    }
+    postNumber = parseFloat(postNumber);
+    console.log(`preNumber : ${preNumber}`);
+    console.log(`postNumber : ${postNumber}`);
+
     // run the calculation, depending on the given operator
+    let result = 0
+    console.log(operator);
     switch(operator) {
         case "^":
-            return Math.pow(preNumber, postNumber);
-            case "√":
-                return Math.sqrt(postNumber);
-                case "×":
-                    return (preNumber * postNumber);
-                    case "÷":
-                        return (preNumber / postNumber);
-                        case "+":
-                            return (preNumber + postNumber);
-                            case "-":
-                                return (preNumber - postNumber);
-                                default:
-                                    return null;
+            result = Math.pow(preNumber, postNumber);
+            break;
+        case "√":
+            result = Math.sqrt(postNumber);
+            break;
+        case "×":
+            result = (preNumber * postNumber);
+            break;
+        case "÷":
+            result = (preNumber / postNumber);
+            break;
+        case "+":
+            result = (preNumber + postNumber);
+            break;
+        case "-":
+            result = (preNumber - postNumber);
+            break;
+        default:
+            result = null;
     }
+    console.log(`result: ${result}`);
+    result = parseNegativeNumbers(result);
+    return result;
 }
     
 // -------------------------------------------------------------------------------------------//
