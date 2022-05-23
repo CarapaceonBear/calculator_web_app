@@ -6,7 +6,7 @@
     justify-content: space-between;
     width: 850px;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 .calculator {
     display: flex;
@@ -20,6 +20,7 @@
 @media screen and (max-width:434px) {
     .full-display {
         width: 300px;
+        // margin-top: 1rem;
     }
     .calculator {
         width: 300px;

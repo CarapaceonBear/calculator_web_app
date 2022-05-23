@@ -16,6 +16,17 @@
             background-color: $light-button-color-3;
         }
     }
+    &__github {
+        &--light {
+            background-color: $light-button-color-3;
+        }
+        &--button-light {
+            color: $light-text-color;
+            &:hover {
+                background-color: $light-button-hover;
+            }
+        }
+    }
 }
 .header {
     &--light {

@@ -346,8 +346,10 @@ const calculateBasic = (segment, symbol) => {
 
 const darkModeButton = document.getElementById("dark-mode-button");
 const lightModeButton = document.getElementById("light-mode-button");
+const githubButton = document.getElementById("github-button");
 const body = document.getElementById("body");
 const colourMode = document.getElementById("colour-mode");
+const github = document.getElementById("github");
 const fullDisplay = document.getElementById("full-display");
 
 const boxZero = document.getElementById("box-zero");
@@ -379,6 +381,8 @@ const onLightModeClicked = () => {
 
     body.classList.add("body--light");
     colourMode.classList.add("nav__colour-mode--light");
+    github.classList.add("nav__github--light");
+    githubButton.classList.add("nav__github--button-light");
     header.classList.add("header--light");
     recordBox.classList.add("record--light");
     fullDisplay.classList.add("full-display--light");
@@ -432,6 +436,8 @@ const onDarkModeClicked = () => {
 
     body.classList.remove("body--light");
     colourMode.classList.remove("nav__colour-mode--light");
+    github.classList.remove("nav__github--light");
+    githubButton.classList.remove("nav__github--button-light");
     header.classList.remove("header--light");
     recordBox.classList.remove("record--light");
     fullDisplay.classList.remove("full-display--light");

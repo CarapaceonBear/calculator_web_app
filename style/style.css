@@ -29,6 +29,15 @@
   justify-content: center;
   align-items: center;
 }
+.nav__github {
+  background-color: #7f4e7b;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @media screen and (max-width: 434px) {
   .nav {
@@ -45,7 +54,7 @@
   justify-content: space-between;
   width: 850px;
   margin: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .calculator {
@@ -259,11 +268,25 @@
   width: 50px;
   border-radius: 50%;
 }
+.nav__github--button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  color: #ffdcf3;
+}
+.nav__github--button:hover {
+  background-color: #98158d;
+}
 
 #dark-mode-button:hover {
   background-color: #f13570;
 }
 
+#light-mode-button {
+  color: #ffdcf3;
+}
 #light-mode-button:hover {
   background-color: #98158d;
 }
@@ -294,6 +317,15 @@
 
 .nav__colour-mode--light {
   background-color: #f6bcd0;
+}
+.nav__github--light {
+  background-color: #f6bcd0;
+}
+.nav__github--button-light {
+  color: #1f081d;
+}
+.nav__github--button-light:hover {
+  background-color: #f13570;
 }
 
 .header--light {
