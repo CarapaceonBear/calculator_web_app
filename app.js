@@ -326,6 +326,7 @@ const calculateBasic = (segment, symbol) => {
     const lightModeButton = document.getElementById("light-mode-button");
     const body = document.getElementById("body");
     const colourMode = document.getElementById("colour-mode");
+    const fullDisplay = document.getElementById("full-display");
 
     const boxZero = document.getElementById("box-zero");
     const boxOne = document.getElementById("box-one");
@@ -355,8 +356,10 @@ const calculateBasic = (segment, symbol) => {
         darkModeButton.classList.remove("hide-button");
 
         body.classList.add("body--light");
-        colourMode.classList.add("colour-mode--light");
+        colourMode.classList.add("nav__colour-mode--light");
         header.classList.add("header--light");
+        recordBox.classList.add("record--light");
+        fullDisplay.classList.add("full-display--light");
 
         boxZero.classList.add("main__box--light3");
         boxOne.classList.add("main__box--light3");
@@ -407,8 +410,10 @@ const calculateBasic = (segment, symbol) => {
         lightModeButton.classList.remove("hide-button");
 
         body.classList.remove("body--light");
-        colourMode.classList.remove("colour-mode--light");
+        colourMode.classList.remove("nav__colour-mode--light");
         header.classList.remove("header--light");
+        recordBox.classList.remove("record--light");
+        fullDisplay.classList.remove("full-display--light");
 
         boxZero.classList.remove("main__box--light3");
         boxOne.classList.remove("main__box--light3");

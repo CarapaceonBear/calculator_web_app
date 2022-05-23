@@ -1,8 +1,8 @@
 Record Box : try to get scrolling to work when flex is reversed
 Display : get a scrollbar on overflow
 Calculator : allow understanding of negative numbers vs subtraction operator
-Dark mode / Light mode button
 Buttons : change out for a backspace icon
 Display/Calculator : have the button symbols appear on the display, 
     tweak what symbols the calculator interprets
 Buttons : full clear on long-press of backspace
+Nav : add link to repo

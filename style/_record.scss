@@ -44,7 +44,8 @@
         width: 400px;
         overflow: auto;
 
-        border: 1px solid $light-button-color-1;
+        color: $dark-text-color;
+        border: 1px solid $dark-button-color-1;
         border-radius: 8px;
     }
 }

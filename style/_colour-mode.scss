@@ -44,3 +44,23 @@
         }
     }
 }
+
+.record {
+    &--light {
+        color: $light-text-color;
+        border: 1px solid $light-button-color-1;
+    }
+}
+
+.full-display {
+    &--light {
+        ::-webkit-scrollbar {
+            background-color: $light-button-color-3;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: $light-button-color-1;
+            border-radius: 6px;
+        }
+    }
+}
