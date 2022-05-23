@@ -154,6 +154,7 @@ const addToRecord = (formula, result) => {
     recordBox.innerHTML += `<p class="record__text"></p><p class="record__text--formula">${formula}</p><p class="record__text--result">${result}</p>`;
 }
 
+// functions for long-press on equals button
 const startLongPress = (event) => {
     timer = setTimeout(fullClear.bind(), delay);
 }
@@ -187,10 +188,10 @@ buttonRoot.addEventListener("click", onOperatorClicked);
 buttonPower.addEventListener("click", onOperatorClicked);
 buttonEquals.addEventListener("click", onEqualsClicked);
 
-buttonEquals.addEventListener("mousedown", startLongPress);
-buttonEquals.addEventListener("touchstart", startLongPress);
-buttonEquals.addEventListener("mouseup", cancelLongPress);
-buttonEquals.addEventListener("touchend", cancelLongPress);
+buttonBackspace.addEventListener("mousedown", startLongPress);
+buttonBackspace.addEventListener("touchstart", startLongPress);
+buttonBackspace.addEventListener("mouseup", cancelLongPress);
+buttonBackspace.addEventListener("touchend", cancelLongPress);
 
 // -------------------------------------------------------------------------------------------//
 // ------------------------------------- CALCULATOR ------------------------------------------//
