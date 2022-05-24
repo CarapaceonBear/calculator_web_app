@@ -4,12 +4,13 @@
 // font-family: 'Indie Flower', cursive;
 // font-family: 'Pacifico', cursive;
 
-$dark-background-color: #1f081d;
-$dark-display-color: #6f5f6e;
-$dark-button-color-1: #91528c;
-$dark-button-color-2: #a776a3;
-$dark-button-color-3: #ba94b7;
+$dark-background-color: #130512;
+$dark-display-color: #583a56;
+$dark-button-color-1: #431c3d;
+$dark-button-color-2: #60335d;
+$dark-button-color-3: #7f4e7b;
 $dark-button-hover: #98158d;
+$dark-text-color: #ffdcf3;
 
 $light-background-color: #ffdcf3;
 $light-display-color: #eda8c6;
@@ -17,8 +18,12 @@ $light-button-color-1: #dd658b;
 $light-button-color-2: #e89bb1;
 $light-button-color-3: #f6bcd0;
 $light-button-hover: #f13570;
+$light-text-color: #1f081d;
 
 $primary-font: 'Pacifico', cursive;
+$text-display-large--phone: 32px;
+$text-display-small--phone: 26px;
+$text-buttons--phone: 26px;
 $text-display-large: 48px;
 $text-display-small: 32px;
 $text-buttons: 32px;

@@ -12,10 +12,71 @@
         font-family: $primary-font;
         font-size: $text-buttons;
 
-        
+        color: $dark-text-color;
+
         &:hover {
-            background-color: $light-button-hover;
+            background-color: $dark-button-hover;
         }
 
     }
+}
+
+.nav {
+    &__colour-mode {
+        &--button {
+            @include navButton();
+        }
+    }
+    &__github {
+        &--button {
+            @include navButton();
+            color: $dark-text-color;
+
+            &:hover {
+                background-color: $dark-button-hover;
+            }
+        }
+    }
+}
+
+#dark-mode-button:hover {
+    background-color: $light-button-hover;
+}
+#light-mode-button {
+    color: $dark-text-color;
+    &:hover {
+        background-color: $dark-button-hover;
+    }
+}
+
+.full-display {
+    ::-webkit-scrollbar {
+        background-color: $dark-button-color-3;
+        border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: $dark-button-color-1;
+        border-radius: 6px;
+    }
+}
+
+// mobile layout
+@media screen and (max-width:434px) {
+    .main {
+        &__button {
+            height: 69px;
+            width: 69px;
+            font-size: $text-buttons--phone;
+        }
+    }
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 850px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 851px) {
+
 }

@@ -1,0 +1,51 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.record {
+    display: none;
+
+    max-height: 650px;
+
+    &__text {
+        height: 1rem;
+        margin: 0;
+        &--formula {
+            font-size: $text-display-small--phone;
+            height: 2rem;
+            margin: 0 0 0 1rem;
+        }
+        &--result {
+            font-size: $text-display-large--phone;
+            height: 2rem;
+            margin: 0 0 0 1rem;
+        }
+    }
+}
+
+// mobile layout
+@media screen and (max-width:434px) {
+
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 850px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 851px) {
+    .record {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        // flex-direction: column-reverse;
+        // justify-content: flex-end;
+        align-items: flex-start;
+        width: 400px;
+        overflow: auto;
+
+        color: $dark-text-color;
+        border: 1px solid $dark-button-color-1;
+        border-radius: 8px;
+    }
+}

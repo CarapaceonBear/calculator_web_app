@@ -7,129 +7,153 @@
     <title>Calculator WebApp</title>
     <link rel="stylesheet" href="./style/style.css">
     <script defer src="./app.js"></script>
+    <script src="https://kit.fontawesome.com/b108659fdc.js" crossorigin="anonymous"></script>
 </head>
-<body class="body">
+<body class="body" id="body">
     <nav class="nav">
-        <!-- currently empty, may include option for light/dark mode, link to my github
-        or inline CV -->
+        <div class="nav__colour-mode" id="colour-mode">
+            <button class="nav__colour-mode--button hide-button" id="dark-mode-button">
+                <i class="fa-solid fa-moon fa-xl"></i>
+            </button>
+            <button class="nav__colour-mode--button" id="light-mode-button">
+                <i class="fa-solid fa-sun fa-xl"></i>
+            </button>
+        </div>
+        <div class="nav__github" id="github">
+            <a href="https://github.com/CarapaceonBear/calculator_web_app/tree/main">
+                <button class="nav__github--button" id="github-button">
+                    <i class="fa-brands fa-github fa-2xl"></i>
+                </button>
+            </a>
+        </div>
     </nav>
 
-    <header class="header">
-        <div class="header__result">
-            <p class="header__result--text" id="result-text">
-                placeholder - result
-            </p>
+    <section class="full-display" id="full-display">
+        <div class="calculator">
+            <header class="header" id="header">
+                <div class="header__result">
+                    <p class="header__result--text" id="result-text">
+                        
+                    </p>
+                </div>
+                <div class="header__formula">
+                    <p class="header__formula--text" id="formula-text">
+                    
+                    </p>
+                </div>
+            </header>
+        
+            <main class="main">
+                <div class="main__panel">
+                    <div class="main__box main__box--zero" id="box-zero">
+                        <button class="main__button" id="button-zero" value="0">
+                            0
+                        </button>
+                    </div>
+                    <div class="main__box main__box--one" id="box-one">
+                        <button class="main__button" id="button-one" value="1">
+                            1
+                        </button>
+                    </div>
+                    <div class="main__box main__box--two" id="box-two">
+                        <button class="main__button" id="button-two" value="2">
+                            2
+                        </button>
+                    </div>
+                    <div class="main__box main__box--three" id="box-three">
+                        <button class="main__button" id="button-three" value="3">
+                            3
+                        </button>
+                    </div>
+                    <div class="main__box main__box--four" id="box-four">
+                        <button class="main__button" id="button-four" value="4">
+                            4
+                        </button>
+                    </div>
+                    <div class="main__box main__box--five" id="box-five">
+                        <button class="main__button" id="button-five" value="5">
+                            5
+                        </button>
+                    </div>
+                    <div class="main__box main__box--six" id="box-six">
+                        <button class="main__button" id="button-six" value="6">
+                            6
+                        </button>
+                    </div>
+                    <div class="main__box main__box--seven" id="box-seven">
+                        <button class="main__button" id="button-seven" value="7">
+                            7
+                        </button>
+                    </div>
+                    <div class="main__box main__box--eight" id="box-eight">
+                        <button class="main__button" id="button-eight" value="8">
+                            8
+                        </button>
+                    </div>
+                    <div class="main__box main__box--nine" id="box-nine">
+                        <button class="main__button" id="button-nine" value="9">
+                            9
+                        </button>
+                    </div>
+                    <div class="main__box main__box--decimal main__box--colour2" id="box-decimal">
+                        <button class="main__button" id="button-decimal" value=".">
+                            .
+                        </button>
+                    </div>
+                    <div class="main__box main__box--backspace main__box--colour2" id="box-backspace">
+                        <button class="main__button" id="button-backspace" value="backspace">
+                            <i class="fa-solid fa-delete-left"></i>
+                        </button>
+                    </div>
+                    <div class="main__box main__box--add main__box--colour2" id="box-add">
+                        <button class="main__button" id="button-add" value="+">
+                            +
+                        </button>
+                    </div>
+                    <div class="main__box main__box--subtract main__box--colour2" id="box-subtract">
+                        <button class="main__button" id="button-subtract" value="-">
+                            -
+                        </button>
+                    </div>
+                    <div class="main__box main__box--multiply main__box--colour2" id="box-multiply">
+                        <button class="main__button" id="button-multiply" value="×">
+                            ×
+                        </button>
+                    </div>
+                    <div class="main__box main__box--divide main__box--colour2" id="box-divide">
+                        <button class="main__button" id="button-divide" value="÷">
+                            ÷
+                        </button>
+                    </div>
+                    <div class="main__box main__box--bracket main__box--colour2" id="box-bracket">
+                        <button class="main__button" id="button-bracket" value="bracket">
+                            ( )
+                        </button>
+                    </div>
+                    <div class="main__box main__box--root main__box--colour2" id="box-root">
+                        <button class="main__button" id="button-root" value="√">
+                            √
+                        </button>
+                    </div>
+                    <div class="main__box main__box--power main__box--colour2" id="box-power">
+                        <button class="main__button" id="button-power" value="^">
+                            ^
+                        </button>
+                    </div>
+                    <div class="main__box main__box--equals main__box--colour1" id="box-equals">
+                        <button class="main__button" id="button-equals" value="=">
+                            =
+                        </button>
+                    </div>
+                </div>
+            </main>
         </div>
-        <div class="header__formula">
-            <p class="header__formula--text" id="formula-text">
-                placeholder - formula
-            </p>
-        </div>
-    </header>
 
-    <main class="main">
-        <div class="main__panel">
-            <div class="main__box main__box--zero">
-                <button class="main__button" id="button-zero" value="0">
-                    0
-                </button>
-            </div>
-            <div class="main__box main__box--one">
-                <button class="main__button" id="button-one" value="1">
-                    1
-                </button>
-            </div>
-            <div class="main__box main__box--two">
-                <button class="main__button" id="button-two" value="2">
-                    2
-                </button>
-            </div>
-            <div class="main__box main__box--three">
-                <button class="main__button" id="button-three" value="3">
-                    3
-                </button>
-            </div>
-            <div class="main__box main__box--four">
-                <button class="main__button" id="button-four" value="4">
-                    4
-                </button>
-            </div>
-            <div class="main__box main__box--five">
-                <button class="main__button" id="button-five" value="5">
-                    5
-                </button>
-            </div>
-            <div class="main__box main__box--six">
-                <button class="main__button" id="button-six" value="6">
-                    6
-                </button>
-            </div>
-            <div class="main__box main__box--seven">
-                <button class="main__button" id="button-seven" value="7">
-                    7
-                </button>
-            </div>
-            <div class="main__box main__box--eight">
-                <button class="main__button" id="button-eight" value="8">
-                    8
-                </button>
-            </div>
-            <div class="main__box main__box--nine">
-                <button class="main__button" id="button-nine" value="9">
-                    9
-                </button>
-            </div>
-            <div class="main__box main__box--decimal">
-                <button class="main__button" id="button-decimal" value=".">
-                    .
-                </button>
-            </div>
-            <div class="main__box main__box--backspace">
-                <button class="main__button" id="button-backspace" value="backspace">
-                    <
-                </button>
-            </div>
-            <div class="main__box main__box--add">
-                <button class="main__button" id="button-add" value="+">
-                    +
-                </button>
-            </div>
-            <div class="main__box main__box--subtract">
-                <button class="main__button" id="button-subtract" value="-">
-                    -
-                </button>
-            </div>
-            <div class="main__box main__box--multiply">
-                <button class="main__button" id="button-multiply" value="*">
-                    ×
-                </button>
-            </div>
-            <div class="main__box main__box--divide">
-                <button class="main__button" id="button-divide" value="/">
-                    ÷
-                </button>
-            </div>
-            <div class="main__box main__box--bracket">
-                <button class="main__button" id="button-bracket" value="bracket">
-                    ( )
-                </button>
-            </div>
-            <div class="main__box main__box--root">
-                <button class="main__button" id="button-root" value="√">
-                    √
-                </button>
-            </div>
-            <div class="main__box main__box--power">
-                <button class="main__button" id="button-power" value="^">
-                    ^
-                </button>
-            </div>
-            <div class="main__box main__box--equals">
-                <button class="main__button" id="button-equals" value="=">
-                    =
-                </button>
-            </div>
+        <div class="record" id="record-box">
+            
         </div>
-    </main>
+
+    </section>
+
 </body>
 </html>

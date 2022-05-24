@@ -10,21 +10,26 @@
 	font: inherit;
 	vertical-align: baseline;
     //
-
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 20px;
     align-items: center;
 
-    background-color: $light-background-color;
+    background-color: $dark-background-color;
 
     font-family: $primary-font;
 }
 
-@media screen and (max-width: 400px) {
-    .body {
-        max-width: 400px;
-    }
+// mobile layout
+@media screen and (max-width:434px) {
+
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 850px) {
+
+}
+
+// desktop layout
+@media screen and (min-width: 851px) {
 
 }

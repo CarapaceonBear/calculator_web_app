@@ -1,0 +1,3 @@
+Record Box : try to get scrolling to work when flex is reversed
+Display : get a scrollbar on overflow
+Longpress on mobile : disallow context menu

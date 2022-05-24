@@ -1,0 +1,41 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.full-display {
+    display: flex;
+    justify-content: space-between;
+    width: 850px;
+    margin: auto;
+    margin-top: 1rem;
+}
+.calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+}
+
+// mobile layout
+@media screen and (max-width:434px) {
+    .full-display {
+        width: 300px;
+        // margin-top: 1rem;
+    }
+    .calculator {
+        width: 300px;
+    }
+
+}
+
+// tablet layout
+@media screen and (min-width: 435px) and (max-width: 850px) {
+    .full-display {
+        max-width: 400px;
+    }
+}
+
+// desktop layout
+@media screen and (min-width: 851px) {
+
+}
