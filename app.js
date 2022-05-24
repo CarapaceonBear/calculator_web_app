@@ -1,7 +1,10 @@
+// -------------------------------------------------------------------------------------------//
+// ------------------------------- INTERACTIVE ELEMENTS --------------------------------------//
+// -------------------------------------------------------------------------------------------//
+
 const resultText = document.getElementById("result-text");
 const formulaText = document.getElementById("formula-text");
 const recordBox = document.getElementById("record-box");
-
 const buttonZero = document.getElementById("button-zero");
 const buttonOne = document.getElementById("button-one");
 const buttonTwo = document.getElementById("button-two");
@@ -37,7 +40,6 @@ formulaText.innerText = "";
 
 const onButtonClick = (event) => {
     moveToMemory();
-    console.log(event.target.value);
     // append value of button to the formula display
     formulaText.innerText += event.target.value;
 }
@@ -45,7 +47,6 @@ const onButtonClick = (event) => {
 const onOperatorClicked = (event) => {
     // ( "-" is not included here, because it can follow any operator)
     moveToMemory();
-    console.log(event.target.value);
     if (formulaText.innerText.length > 0) {
         // "√" can't follow itself or "^"
         if (event.target.value === "√") {
@@ -69,11 +70,9 @@ const onOperatorClicked = (event) => {
 }
 
 const onEqualsClicked = (event) => {
-    console.log(event.target.value);
     // if equals button is pressed, run calculation
     // if bracketCount is positive, append ")"s until it is 0
     let bracketCount = countBrackets(formulaText.innerText);
-    console.log(bracketCount);
     while (bracketCount > 0) {
         formulaText.innerText += ")";
         bracketCount --
@@ -90,7 +89,6 @@ const onEqualsClicked = (event) => {
 
 const onBackspaceClicked = (event) => {
     moveToMemory();
-    console.log(event.target.value);
     // if backspace button is pressed, remove last character
     formulaText.innerText = formulaText.innerText
     .substring(0, formulaText.innerText.length - 1);
@@ -98,7 +96,6 @@ const onBackspaceClicked = (event) => {
 
 const onBracketClicked = (event) => {
     moveToMemory();
-    console.log(event.target.value);
     // if bracket button is pressed, append an open bracket,
     // if there is already an open bracket, append a closed bracket. 
     let bracketCount = countBrackets(formulaText.innerText) 
@@ -207,6 +204,7 @@ let bracketSegment = "";
 let currentCount = 0;
 let preceder = 0;
 let follower = 0;
+// const operators = ["^","√","×", "÷", "+", "-"];
 
 const calculationRunner = (overallCalculation) => {
     workingFormula = overallCalculation;
@@ -221,20 +219,25 @@ const calculationRunner = (overallCalculation) => {
     // run the bracket segment calculator that many times
     for (let j = 1; j <= segmentCount; j++) {
         let segmentResult = bracketSegmenter(workingFormula);
-        // check for directly preceding/following numbers or brackets
-        if ((numberCheck.test(workingFormula[bracketStart-1]))
-        || (workingFormula[bracketStart-1] == ")")) {
-            segmentResult = `×${segmentResult}`;
+        // if the returned bracket segment is empty, just remove it
+        if (segmentResult.length == 0) {
+            workingFormula = workingFormula.slice(0, bracketStart);
+        } else {
+            // check for directly preceding/following numbers or brackets
+            if ((numberCheck.test(workingFormula[bracketStart-1]))
+            || (workingFormula[bracketStart-1] == ")")) {
+                segmentResult = `×${segmentResult}`;
+            }
+            if ((numberCheck.test(workingFormula[bracketEnd+1]))
+            || (workingFormula[bracketEnd+1] == "(")) {
+                segmentResult = `${segmentResult}×`;
+            }
+            // replace the calculated result in place of the bracket segment
+            // .replace() won't do it, need to concat "slice before segment"+"result"+"slice after segment"
+            workingFormula = 
+            `${workingFormula.slice(0, bracketStart)}${segmentResult}${workingFormula.slice(bracketEnd+1, workingFormula.length)}`;
+            console.log(workingFormula);
         }
-        if ((numberCheck.test(workingFormula[bracketEnd+1]))
-        || (workingFormula[bracketEnd+1] == "(")) {
-            segmentResult = `${segmentResult}×`;
-        }
-        // replace the calculated result in place of the bracket segment
-        // .replace() won't do it, need to concat "slice before segment"+"result"+"slice after segment"
-        workingFormula = 
-        `${workingFormula.slice(0, bracketStart)}${segmentResult}${workingFormula.slice(bracketEnd+1, workingFormula.length)}`;
-        console.log(workingFormula);
     };
     // once all the brackets are resolved, run the calculation on the simplified formula
     let finalResult = performCalculation(workingFormula);
@@ -266,7 +269,7 @@ const bracketSegmenter = (formula) => {
         };
     };
     bracketSegment = formula.slice(bracketStart+1, bracketEnd);
-    console.log(`bracketSegment = ${bracketSegment}`);
+    console.log(`(${bracketSegment})`);
     return performCalculation(bracketSegment);
 }
 
@@ -287,7 +290,6 @@ const performCalculation = (segment) => {
         for (let j = 1; j <= currentCount; j++) {
             
             let basicResult = calculateBasic(workingSegment, operator);
-            console.log(`basic result ${basicResult}`);
             
             if (operator === "√") {
                 // if a number directly precedes, insert "*"
@@ -318,12 +320,12 @@ const parseNegativeNumbers = (segment) => {
             }
         }
     }
-    console.log(negativeSegment);
     return negativeSegment;
 }
 
 
 const calculateBasic = (segment, symbol) => {
+    console.log(segment);
     let operator = symbol;
     // get the first operator in the current segment
     let operatorIndex = segment.indexOf(operator);
@@ -355,7 +357,6 @@ const calculateBasic = (segment, symbol) => {
     let postNumber = segment.slice(operatorIndex+1, follower+1);
 
     // swap out "n" for "-", to return negative numbers for calculation
-
     for (let i = 0; i < preNumber.length; i++) {
         if (preNumber[i] === "n") {
             if (i == 0) {
