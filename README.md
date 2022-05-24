@@ -1,9 +1,10 @@
 # calculator_web_app
 ## Calculator app in Javascript, with HTML / CSS interface
 -----------------------------------------------------------------------------------------------
+![look](https://i.imgur.com/i7ZwE2x.png)<br>
 This is a simple calculator app, written in JavaScript, with a GUI written in HTML and CSS.<br>
-It should perform basic calculations.<br>
-It should be formatted for mobile and desktop layouts.<br>
+It performs basic calculations, can handle brackets and the correct order of operations<br>
+It is flexible for mobile, tablet and desktop layouts.<br>
 
 -----------------------------------------------------------------------------------------------
 ### Initial Design sketch
