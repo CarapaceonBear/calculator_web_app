@@ -237,7 +237,18 @@ const calculationRunner = (overallCalculation) => {
         console.log(workingFormula);
     };
     // once all the brackets are resolved, run the calculation on the simplified formula
-    return(performCalculation(workingFormula));
+    let finalResult = performCalculation(workingFormula);
+    // as a final step, need to replace any lingering "n" placeholders
+    for (let i = 0; i < finalResult.length; i++) {
+        if (finalResult[i] === "n") {
+            if (i == 0) {
+                finalResult = `-${finalResult.slice(1, finalResult.length)}`;
+            } else {
+                finalResult = `${finalResult.slice(0, i)}-${finalResult.slice(i+1, finalResult.length)}`;
+            }
+        }
+    }
+    return finalResult;
 };
 
 const bracketSegmenter = (formula) => {
@@ -341,9 +352,7 @@ const calculateBasic = (segment, symbol) => {
         preceder = operatorIndex;
     }
     let preNumber = segment.slice(preceder, operatorIndex);
-    console.log(`preNumber : ${preNumber}`);
     let postNumber = segment.slice(operatorIndex+1, follower+1);
-    console.log(`postNumber : ${postNumber}`);
 
     // swap out "n" for "-", to return negative numbers for calculation
 
@@ -367,12 +376,9 @@ const calculateBasic = (segment, symbol) => {
         }
     }
     postNumber = parseFloat(postNumber);
-    console.log(`preNumber : ${preNumber}`);
-    console.log(`postNumber : ${postNumber}`);
 
     // run the calculation, depending on the given operator
     let result = 0
-    console.log(operator);
     switch(operator) {
         case "^":
             result = Math.pow(preNumber, postNumber);
@@ -395,8 +401,8 @@ const calculateBasic = (segment, symbol) => {
         default:
             result = null;
     }
+    result = parseNegativeNumbers(result.toString());
     console.log(`result: ${result}`);
-    result = parseNegativeNumbers(result);
     return result;
 }
     
