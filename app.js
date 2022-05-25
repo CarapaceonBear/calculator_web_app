@@ -27,20 +27,14 @@ const buttonPower = document.getElementById("button-power");
 const buttonEquals = document.getElementById("button-equals");
 
 const numberCheck = new RegExp('[0-9]');
-const numberDecimalCheck = new RegExp("[n0-9.]");
 const operators = ["^","√","×", "÷", "+", "-"];
-const operatorCheck = new RegExp("[^0-9).]");
+const operatorCheck = new RegExp("[^0-9)]");
 let currentResult = null;
 let timer = null;
 const delay = 1000;
 
-console.log("script linked");
-resultText.innerText = "";
-formulaText.innerText = "";
-
-const onButtonClick = (event) => {
+const onButtonClicked = (event) => {
     moveToMemory();
-    // append value of button to the formula display
     formulaText.innerText += event.target.value;
 }
 
@@ -48,14 +42,11 @@ const onOperatorClicked = (event) => {
     // ( "-" is not included here, because it can follow any operator)
     moveToMemory();
     if (formulaText.innerText.length > 0) {
-        // "√" can't follow itself or "^"
         if (event.target.value === "√") {
             if ((formulaText.innerText[formulaText.innerText.length-1] === "√")
              || (formulaText.innerText[formulaText.innerText.length-1] === "^")) {
                  return;
                 }
-                // the other operators can't directly follow another operator, eg "*/" or "^+""
-                // or an open bracket
             } else {
                 if (operatorCheck.test(formulaText.innerText[formulaText.innerText.length-1])) {
                     console.log("test2");
@@ -63,23 +54,18 @@ const onOperatorClicked = (event) => {
                 }
         }
         formulaText.innerText += event.target.value;
-        // can't start with an operator, except "√"
     } else if (event.target.value === "√") {
         formulaText.innerText += event.target.value;
     }
 }
 
 const onEqualsClicked = (event) => {
-    // if equals button is pressed, run calculation
-    // if bracketCount is positive, append ")"s until it is 0
     let bracketCount = countBrackets(formulaText.innerText);
     while (bracketCount > 0) {
         formulaText.innerText += ")";
         bracketCount --
     }
-    // check there is something in the formula box
     if (formulaText.innerText.length > 0) {
-        // check that the final character is a number or ")"
         if ((numberCheck.test(formulaText.innerText[formulaText.innerText.length-1]))
         || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
             runCalculation(formulaText.innerText);
@@ -89,21 +75,16 @@ const onEqualsClicked = (event) => {
 
 const onBackspaceClicked = (event) => {
     moveToMemory();
-    // if backspace button is pressed, remove last character
     formulaText.innerText = formulaText.innerText
     .substring(0, formulaText.innerText.length - 1);
 }
 
 const onBracketClicked = (event) => {
     moveToMemory();
-    // if bracket button is pressed, append an open bracket,
-    // if there is already an open bracket, append a closed bracket. 
     let bracketCount = countBrackets(formulaText.innerText) 
     if (bracketCount == 0) {
         formulaText.innerText += "(";
     } else {
-        // check if current final character is a number, or ")",
-        // if not, open another bracket.
         if ((numberCheck.test(formulaText.innerText[formulaText.innerText.length-1]))
         || (formulaText.innerText[formulaText.innerText.length-1] === ")")) {
             formulaText.innerText += ")";
@@ -126,22 +107,17 @@ const countBrackets = (formula) => {
 }
 
 const runCalculation = (formula) => {
-    // parses the formula and calculates the result.
-    let returnedCalculation = calculationRunner(formula);
-    //   this is handled by calculator.js and returned
-    // (if the result is no different from the formula, 
-    //  eg if the 'formula' is just '4', then return nothing)
+    let returnedCalculation = interpretEquation(formula);
     if (formulaText.innerText === returnedCalculation) {
         return;
     }
-    // result is displayed in formula field.
     currentResult = returnedCalculation;
     formulaText.innerText = currentResult;
     resultText.innerText = formula;
-    // on desktop, add to the record box
     addToRecord(formula, returnedCalculation);
 }
 
+// triggered by most button presses, move result to memory only when starting the next calculation
 const moveToMemory = () => {
     if (currentResult != null) {
         resultText.innerText = currentResult;
@@ -152,7 +128,6 @@ const addToRecord = (formula, result) => {
     recordBox.innerHTML += `<p class="record__text"></p><p class="record__text--formula">${formula}</p><p class="record__text--result">${result}</p>`;
 }
 
-// functions for long-press on equals button
 const startLongPress = (event) => {
     timer = setTimeout(fullClear.bind(), delay);
 }
@@ -165,27 +140,26 @@ const fullClear = () => {
     currentResult = null;
 }
 
-buttonZero.addEventListener("click", onButtonClick);
-buttonOne.addEventListener("click", onButtonClick);
-buttonTwo.addEventListener("click", onButtonClick);
-buttonThree.addEventListener("click", onButtonClick);
-buttonFour.addEventListener("click", onButtonClick);
-buttonFive.addEventListener("click", onButtonClick);
-buttonSix.addEventListener("click", onButtonClick);
-buttonSeven.addEventListener("click", onButtonClick);
-buttonEight.addEventListener("click", onButtonClick);
-buttonNine.addEventListener("click", onButtonClick);
+buttonZero.addEventListener("click", onButtonClicked);
+buttonOne.addEventListener("click", onButtonClicked);
+buttonTwo.addEventListener("click", onButtonClicked);
+buttonThree.addEventListener("click", onButtonClicked);
+buttonFour.addEventListener("click", onButtonClicked);
+buttonFive.addEventListener("click", onButtonClicked);
+buttonSix.addEventListener("click", onButtonClicked);
+buttonSeven.addEventListener("click", onButtonClicked);
+buttonEight.addEventListener("click", onButtonClicked);
+buttonNine.addEventListener("click", onButtonClicked);
 buttonDecimal.addEventListener("click", onOperatorClicked);
 buttonBackspace.addEventListener("click", onBackspaceClicked);
 buttonAdd.addEventListener("click", onOperatorClicked);
-buttonSubtract.addEventListener("click", onButtonClick);
+buttonSubtract.addEventListener("click", onButtonClicked);
 buttonMultiply.addEventListener("click", onOperatorClicked);
 buttonDivide.addEventListener("click", onOperatorClicked);
 buttonBracket.addEventListener("click", onBracketClicked);
 buttonRoot.addEventListener("click", onOperatorClicked);
 buttonPower.addEventListener("click", onOperatorClicked);
 buttonEquals.addEventListener("click", onEqualsClicked);
-
 buttonBackspace.addEventListener("mousedown", startLongPress);
 buttonBackspace.addEventListener("touchstart", startLongPress);
 buttonBackspace.addEventListener("mouseup", cancelLongPress);
@@ -194,119 +168,159 @@ buttonBackspace.addEventListener("touchend", cancelLongPress);
 // -------------------------------------------------------------------------------------------//
 // ------------------------------------- CALCULATOR ------------------------------------------//
 // -------------------------------------------------------------------------------------------//
-// call calculationRunner() to run
 
-let workingFormula = "";
+const interpretEquation = (overallEquation) => {
+    let workingEquation = overallEquation;
+    let bracketCount = countSymbols(workingEquation, "(" );
+    workingEquation = resolveBracketPairs(bracketCount, workingEquation);
+    let finalResult = runCalculations(workingEquation);
+    finalResult = replaceNegativeNumbers(finalResult);
+    return finalResult;
+}
 
-let bracketStart = 0;
-let bracketEnd = 0;
-let bracketSegment = "";
-let currentCount = 0;
-let preceder = 0;
-let follower = 0;
-// const operators = ["^","√","×", "÷", "+", "-"];
-
-const calculationRunner = (overallCalculation) => {
-    workingFormula = overallCalculation;
-    console.log(workingFormula);
-    // first count how many times I need to pull out a bracket pair
-    let segmentCount = 0;
-    for (let i = 0; i < workingFormula.length; i++) {
-        if (workingFormula[i] == "(") {
-            segmentCount ++;
-        };
-    };
-    // run the bracket segment calculator that many times
-    for (let j = 1; j <= segmentCount; j++) {
-        let segmentResult = bracketSegmenter(workingFormula);
-        // if the returned bracket segment is empty, just remove it
-        if (segmentResult.length == 0) {
-            workingFormula = workingFormula.slice(0, bracketStart);
+const resolveBracketPairs = (count, equation) => {
+    let numberCheck = new RegExp('[0-9]');
+    let bracketCount = count;
+    let workingEquation = equation
+    for (let j = 1; j <= bracketCount; j++) {
+        let bracketSegmentData = retrieveBracketSegment(workingEquation);
+        let segmentStart = bracketSegmentData[0];
+        let segmentEnd = bracketSegmentData[1];
+        let bracketSegment = runCalculations(bracketSegmentData[2]);
+        if (bracketSegment.length == 0) {
+            workingEquation = workingEquation.slice(0, segmentStart)
         } else {
-            // check for directly preceding/following numbers or brackets
-            if ((numberCheck.test(workingFormula[bracketStart-1]))
-            || (workingFormula[bracketStart-1] == ")")) {
-                segmentResult = `×${segmentResult}`;
+            if ((numberCheck.test(workingEquation[segmentStart - 1]))
+            || (workingEquation[segmentStart - 1] == ")" )) {
+                bracketSegment = `×${bracketSegment}`;
             }
-            if ((numberCheck.test(workingFormula[bracketEnd+1]))
-            || (workingFormula[bracketEnd+1] == "(")) {
-                segmentResult = `${segmentResult}×`;
+            if ((numberCheck.test(workingEquation[segmentEnd + 1]))
+            || (workingEquation[segmentEnd + 1] == "(" )) {
+                bracketSegment = `${bracketSegment}×`;
             }
-            // replace the calculated result in place of the bracket segment
-            // .replace() won't do it, need to concat "slice before segment"+"result"+"slice after segment"
-            workingFormula = 
-            `${workingFormula.slice(0, bracketStart)}${segmentResult}${workingFormula.slice(bracketEnd+1, workingFormula.length)}`;
-            console.log(workingFormula);
-        }
-    };
-    // once all the brackets are resolved, run the calculation on the simplified formula
-    let finalResult = performCalculation(workingFormula);
-    // as a final step, need to replace any lingering "n" placeholders
-    for (let i = 0; i < finalResult.length; i++) {
-        if (finalResult[i] === "n") {
-            if (i == 0) {
-                finalResult = `-${finalResult.slice(1, finalResult.length)}`;
-            } else {
-                finalResult = `${finalResult.slice(0, i)}-${finalResult.slice(i+1, finalResult.length)}`;
-            }
+            workingEquation = 
+            `${workingEquation.slice(0, segmentStart)}${bracketSegment}${workingEquation.slice(segmentEnd + 1, workingEquation.length)}`;
         }
     }
-    return finalResult;
-};
-
-const bracketSegmenter = (formula) => {
-    // select the bracket segment for calculation
-    for (let i = formula.length; i >= 0; i--) {
-        if (formula[i] == "(") {
-            bracketStart = i;
-            break;
-        };
-    };
-    for (let j = bracketStart; j < formula.length; j++) {
-        if (formula[j] == ")") {
-            bracketEnd = j;
-            break;
-        };
-    };
-    bracketSegment = formula.slice(bracketStart+1, bracketEnd);
-    console.log(`(${bracketSegment})`);
-    return performCalculation(bracketSegment);
+    return workingEquation;
 }
 
-const performCalculation = (segment) => {
-    // first step, parse negative numbers, swap in "n". Eg "-6" -> "n6"
-    // this allows the segments to differentiate between subtraction and negative numbers
-    let workingSegment = parseNegativeNumbers(segment);
-    // perform the calculation process for each operator in sequence
+const retrieveBracketSegment = (workingEquation) => {
+    let openingBracketIndex = 0;
+    for (let i = workingEquation.length; i >= 0; i--) {
+        if (workingEquation[i] == "(" ) {
+            openingBracketIndex = i;
+            break;
+        }
+    }
+    let closingBracketIndex = 0;
+    for (let j = openingBracketIndex; j < workingEquation.length; j++) {
+        if (workingEquation[j] == ")" ) {
+            closingBracketIndex = j;
+            break;
+        }
+    }
+    bracketSegment = workingEquation.slice(openingBracketIndex + 1, closingBracketIndex);
+    return [openingBracketIndex, closingBracketIndex, bracketSegment];
+}
+
+const runCalculations = (equation) => {
+    let operators = ["^","√","×", "÷", "+", "-"];
+    let numberCheck = new RegExp('[0-9]');
+    let workingEquation = swapOutNegativeNumbers(equation);
     operators.forEach((operator) => {
-        // count how many of the given operator there are
-        currentCount = 0;
-        for (let i = 0; i < workingSegment.length; i++) {
-            if (workingSegment[i] == operator) {
-                currentCount ++;
-            };
-        };
-        // run the calculation that many times, passing in the specific operator
-        for (let j = 1; j <= currentCount; j++) {
-            
-            let basicResult = calculateBasic(workingSegment, operator);
-            
+        currentCount = countSymbols(workingEquation, operator)
+        for (let i = 1; i <= currentCount; i ++) {
+            let calculationData = takeNumbersFromEquation(workingEquation, operator);
+            let precedingIndex = calculationData[0];
+            let followingIndex = calculationData[1];
+            let calculationResult = performArithmetic(calculationData[2], calculationData[3], operator);
             if (operator === "√") {
-                // if a number directly precedes, insert "*"
-                if (numberCheck.test(workingSegment[preceder-1])) {
-                    basicResult = `×${basicResult}`;
+                if (numberCheck.test(workingEquation[precedingIndex - 1])) {
+                    calculationResult = `×${calculationResult}`;
                 }
             }
-            
-            workingSegment = 
-            `${workingSegment.slice(0, preceder)}${basicResult}${workingSegment.slice(follower+1, workingSegment.length)}`;
-        };
+            workingEquation = 
+            `${workingEquation.slice(0, precedingIndex)}${calculationResult}${workingEquation.slice(followingIndex + 1, workingEquation.length)}`;
+        }
     });
-    
-    return (workingSegment);
+    return workingEquation;
 }
 
-const parseNegativeNumbers = (segment) => {
+const takeNumbersFromEquation = (equation, symbol) => {
+    let expandedNumberCheck = new RegExp("[n0-9.]");
+    let workingEquation = equation;
+    let operator = symbol;
+    let operatorIndex = workingEquation.indexOf(operator);
+    let precedingIndex = 0;
+    if (operator != "√") {
+        for (let i = operatorIndex - 1; i >= 0; i--) {
+            if (expandedNumberCheck.test(workingEquation[i])) {
+                precedingIndex = i
+            } else {
+                break;
+            }
+        }
+    } else {
+        precedingIndex = operatorIndex;
+    }
+    let followingIndex = 0;
+    for (let j = operatorIndex + 1; j < workingEquation.length; j++) {
+        if (expandedNumberCheck.test(workingEquation[j])) {
+            followingIndex = j;
+        } else {
+            break;
+        }
+    }
+    let precedingNumber = workingEquation.slice(precedingIndex, operatorIndex);
+    let followingNumber = workingEquation.slice(operatorIndex + 1, followingIndex + 1);
+    precedingNumber = parseFloat(replaceNegativeNumbers(precedingNumber));
+    followingNumber = parseFloat(replaceNegativeNumbers(followingNumber));
+    return [precedingIndex, followingIndex, precedingNumber, followingNumber]
+}
+
+const performArithmetic = (firstNumber, secondNumber, symbol) => {
+    let precedingNumber = firstNumber;
+    let followingNumber = secondNumber;
+    let operator = symbol;
+    let result = 0;
+    switch(operator) {
+        case "^":
+            result = Math.pow(precedingNumber, followingNumber);
+            break;
+        case "√":
+            result = Math.sqrt(followingNumber);
+            break;
+        case "×":
+            result = (precedingNumber * followingNumber);
+            break;
+        case "÷":
+            result = (precedingNumber / followingNumber);
+            break;
+        case "+":
+            result = (precedingNumber + followingNumber);
+            break;
+        case "-":
+            result = (precedingNumber - followingNumber);
+            break;
+        default:
+            result = null;
+    }
+    result = swapOutNegativeNumbers(result.toString());
+    return result;
+}
+
+const countSymbols = (section, symbol) => {
+    let count = 0;
+    for (let i = 0; i < section.length; i++) {
+        if (section[i] == symbol) {
+            count ++;
+        }
+    }
+    return count;
+}
+
+const swapOutNegativeNumbers = (segment) => {
     let negativeSegment = segment;
     if (negativeSegment == null) {
         return negativeSegment;
@@ -323,94 +337,23 @@ const parseNegativeNumbers = (segment) => {
     return negativeSegment;
 }
 
-
-const calculateBasic = (segment, symbol) => {
-    console.log(segment);
-    let operator = symbol;
-    // get the first operator in the current segment
-    let operatorIndex = segment.indexOf(operator);
-    // get the surrounding numbers
-    if (operator != "√") {
-        for (let i = operatorIndex-1; i >= 0; i--) {
-            if (numberDecimalCheck.test(segment[i])) {
-                preceder = i;
-            } else {
-                break;
-            }
-        }
-    }
-    for (let j = operatorIndex+1; j < segment.length; j++) {
-        if (numberDecimalCheck.test(segment[j])) {
-            follower = j;
-        } else {
-            break;
-        }
-    }  
-    
-    // grab the relevant numbers from the segment
-    if (operator === "√") {
-        // for roots specifically, just need the numbers after
-        // however, need to update this to slice the result back in
-        preceder = operatorIndex;
-    }
-    let preNumber = segment.slice(preceder, operatorIndex);
-    let postNumber = segment.slice(operatorIndex+1, follower+1);
-
-    // swap out "n" for "-", to return negative numbers for calculation
-    for (let i = 0; i < preNumber.length; i++) {
-        if (preNumber[i] === "n") {
+const replaceNegativeNumbers = (segment) => {
+    let number = segment;
+    for (let i = 0; i < number.length; i++) {
+        if (number[i] == "n") {
             if (i == 0) {
-                preNumber = `-${preNumber.slice(1, preNumber.length)}`;
+                number = `-${number.slice(1, number.length)}`;
             } else {
-                preNumber = `${preNumber.slice(0, i)}-${preNumber.slice(i+1, preNumber.length)}`;
+                number = `${number.slice(0, i)}-${number.slice(i + 1, number.length)}`;
             }
         }
     }
-    preNumber = parseFloat(preNumber);
-    for (let i = 0; i < postNumber.length; i++) {
-        if (postNumber[i] === "n") {
-            if (i == 0) {
-                postNumber = `-${postNumber.slice(1, postNumber.length)}`;
-            } else {
-                postNumber = `${postNumber.slice(0, i)}-${postNumber.slice(i+1, postNumber.length)}`;
-            }
-        }
-    }
-    postNumber = parseFloat(postNumber);
-
-    // run the calculation, depending on the given operator
-    let result = 0
-    switch(operator) {
-        case "^":
-            result = Math.pow(preNumber, postNumber);
-            break;
-        case "√":
-            result = Math.sqrt(postNumber);
-            break;
-        case "×":
-            result = (preNumber * postNumber);
-            break;
-        case "÷":
-            result = (preNumber / postNumber);
-            break;
-        case "+":
-            result = (preNumber + postNumber);
-            break;
-        case "-":
-            result = (preNumber - postNumber);
-            break;
-        default:
-            result = null;
-    }
-    result = parseNegativeNumbers(result.toString());
-    console.log(`result: ${result}`);
-    return result;
+    return number;
 }
     
 // -------------------------------------------------------------------------------------------//
 // ------------------------------------ COLOUR MODE ------------------------------------------//
 // -------------------------------------------------------------------------------------------//
-// applies new classes to each element which changes colour, corresponding with _colour-mode.scss
 
 const darkModeButton = document.getElementById("dark-mode-button");
 const lightModeButton = document.getElementById("light-mode-button");
