@@ -30,6 +30,7 @@ const numberCheck = new RegExp('[0-9]');
 const operators = ["^","√","×", "÷", "+", "-"];
 const operatorCheck = new RegExp("[^0-9)]");
 let currentResult = null;
+formulaText.innerText = "";
 let timer = null;
 const delay = 1000;
 
