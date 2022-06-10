@@ -5,6 +5,7 @@
 This is a simple calculator app, written in JavaScript, with a GUI written in HTML and CSS.<br>
 It performs basic calculations, can handle brackets and the correct order of operations<br>
 It is flexible for mobile, tablet and desktop layouts.<br>
+End-to-end testing with cypress.<br>
 
 -----------------------------------------------------------------------------------------------
 ### Initial Design sketch
