@@ -30,6 +30,7 @@ const numberCheck = new RegExp('[0-9]');
 const operators = ["^","√","×", "÷", "+", "-"];
 const operatorCheck = new RegExp("[^0-9)]");
 let currentResult = null;
+resultText.innerText = "";
 formulaText.innerText = "";
 let timer = null;
 const delay = 1000;
@@ -174,8 +175,14 @@ const interpretEquation = (overallEquation) => {
     let workingEquation = overallEquation;
     let bracketCount = countSymbols(workingEquation, "(" );
     workingEquation = resolveBracketPairs(bracketCount, workingEquation);
+    if (workingEquation === "Infinity") {
+        return workingEquation;
+    }
     let finalResult = runCalculations(workingEquation);
-    finalResult = replaceNegativeNumbers(finalResult);
+    console.log(finalResult);
+    if (finalResult != "Infinity") {
+        finalResult = replaceNegativeNumbers(finalResult);
+    }
     return finalResult;
 }
 
@@ -188,6 +195,10 @@ const resolveBracketPairs = (count, equation) => {
         let segmentStart = bracketSegmentData[0];
         let segmentEnd = bracketSegmentData[1];
         let bracketSegment = runCalculations(bracketSegmentData[2]);
+        if (bracketSegment === "Infinity") {
+            workingEquation = bracketSegment;
+            break;
+        }
         if (bracketSegment.length == 0) {
             workingEquation = workingEquation.slice(0, segmentStart)
         } else {
@@ -236,6 +247,11 @@ const runCalculations = (equation) => {
             let precedingIndex = calculationData[0];
             let followingIndex = calculationData[1];
             let calculationResult = performArithmetic(calculationData[2], calculationData[3], operator);
+            console.log(calculationResult);
+            if (calculationResult === Infinity) {
+                workingEquation = calculationResult;
+                break;
+            }
             if (operator === "√") {
                 if (numberCheck.test(workingEquation[precedingIndex - 1])) {
                     calculationResult = `×${calculationResult}`;
@@ -307,7 +323,9 @@ const performArithmetic = (firstNumber, secondNumber, symbol) => {
         default:
             result = null;
     }
-    result = swapOutNegativeNumbers(result.toString());
+    if (result != Infinity) {
+        result = swapOutNegativeNumbers(result.toString());
+    }
     return result;
 }
 

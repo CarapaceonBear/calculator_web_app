@@ -1,3 +1,5 @@
 Record Box : try to get scrolling to work when flex is reversed
+            : button to clear
 Display : get a scrollbar on overflow
 Longpress on mobile : disallow context menu
+Colour-mode : transition

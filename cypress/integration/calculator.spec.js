@@ -1,9 +1,5 @@
 // http://127.0.0.1:5500/index.html
 
-// ARRANGE -> get things ready
-// ACT -> do the test
-// ASSERT -> seeing if it is successful
-
 beforeEach(() => {
     cy.visit("/");
 });
@@ -368,6 +364,40 @@ describe("should calculate square roots", () => {
 
 })
 
+describe("should calculate powers", () => {
+
+    it("should calculate a simple power, 2^2 = 4", () => {
+        cy.get("#button-two").click();
+        cy.get("#button-power").click();
+        cy.get("#button-two").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", 4);
+    });
+
+    it("should calculate a large power, 2^40 = 1099511627776", () => {
+        cy.get("#button-two").click();
+        cy.get("#button-power").click();
+        cy.get("#button-four").click();
+        cy.get("#button-zero").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", 1099511627776);
+    });
+
+    it("should calculate a decimal power, 6.25^0.5 = 2.5", () => {
+        cy.get("#button-six").click();
+        cy.get("#button-decimal").click();
+        cy.get("#button-two").click();
+        cy.get("#button-five").click();
+        cy.get("#button-power").click();
+        cy.get("#button-zero").click();
+        cy.get("#button-decimal").click();
+        cy.get("#button-five").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", 2.5);
+    });
+
+})
+
 describe("should display contextual brackets", () => {
 
     it("should display an open bracket first", () => {
@@ -489,11 +519,103 @@ describe("should not run the calculation if the final character is an operator",
 
 });
 
-// describe("should calculate powers", () => {})
-// describe("should handle calculations with bracket pairs", () => {})
-// describe("should remove characters with backspace", () => {})
-// describe("should handle large numbers")
+describe("should not run the calculation if there is no calculation", () => {
 
-// NEGATIVE TEST CASES
-// /0?
+    it("should not run the calculation if the formula has no operators", () => {
+        cy.get("#button-eight").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", "8");
+        cy.get(".header__result--text").should("have.text", "");
+    });
+
+    it("should not run the calculation if the formula is empty", () => {
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", "");
+        cy.get(".header__result--text").should("have.text", "");
+    })
+
+
+});
+
+describe("should not break when handling 'infinite' returns", () => {
+
+    it("should return 'Infinity' when dividing by 0", () => {
+        cy.get("#button-five").click();
+        cy.get("#button-divide").click();
+        cy.get("#button-zero").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", "Infinity");
+    });
+
+    it("should return 'Infinity' when calculating a large power, such as 2^55555", () => {
+        cy.get("#button-two").click();
+        cy.get("#button-power").click();
+        cy.get("#button-five").click();
+        cy.get("#button-five").click();
+        cy.get("#button-five").click();
+        cy.get("#button-five").click();
+        cy.get("#button-five").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", "Infinity");
+    })
+
+})
+
+it("should remove characters with backspace button", () => {
+    cy.get("#button-eight").click();
+    cy.get("#button-eight").click();
+    cy.get("#button-eight").click();
+    cy.get(".header__formula--text").should("have.text", "888");
+    cy.get("#button-backspace").click();
+    cy.get(".header__formula--text").should("have.text", "88");
+    
+})
+
+describe("should handle calculations with bracket pairs", () => {
+
+    it("should calculate brackets before other operators, 2 * (2 + 2) = 8", () => {
+        cy.get("#button-two").click();
+        cy.get("#button-multiply").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-two").click();
+        cy.get("#button-add").click();
+        cy.get("#button-two").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", 8);
+    })
+
+    it("should calculate multiple bracket pairs, (2 * 3) + (2 + 2) = 10", () => {
+        cy.get("#button-bracket").click();
+        cy.get("#button-two").click();
+        cy.get("#button-multiply").click();
+        cy.get("#button-three").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-add").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-two").click();
+        cy.get("#button-add").click();
+        cy.get("#button-two").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", 10);
+    })
+
+    it("should multiply brackets which are directly following, (2 * 3)(2 + 2) = 24", () => {
+        cy.get("#button-bracket").click();
+        cy.get("#button-two").click();
+        cy.get("#button-multiply").click();
+        cy.get("#button-three").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-two").click();
+        cy.get("#button-add").click();
+        cy.get("#button-two").click();
+        cy.get("#button-bracket").click();
+        cy.get("#button-equals").click();
+        cy.get(".header__formula--text").should("have.text", 24);
+    })
+
+})
+
 
