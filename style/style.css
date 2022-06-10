@@ -311,28 +311,51 @@
   display: none;
 }
 
+.body {
+  transition: background-color 1s;
+}
 .body--light {
   background-color: #ffdcf3;
 }
 
+.nav__colour-mode {
+  transition: background-color 1s;
+}
 .nav__colour-mode--light {
   background-color: #f6bcd0;
+}
+.nav__github {
+  transition: background-color 1s;
 }
 .nav__github--light {
   background-color: #f6bcd0;
 }
 .nav__github--button-light {
+  transition: color 1s;
   color: #1f081d;
 }
 .nav__github--button-light:hover {
   background-color: #f13570;
 }
 
+.header {
+  transition: background-color 1s;
+}
+.header__result {
+  transition: color 1s;
+}
+.header__formula {
+  transition: color 1s;
+}
 .header--light {
+  transition: background-color 1s;
   background-color: #eda8c6;
   color: #1f081d;
 }
 
+.main__box {
+  transition: background-color 1s;
+}
 .main__box--light1 {
   background-color: #dd658b;
 }
@@ -342,6 +365,9 @@
 .main__box--light3 {
   background-color: #f6bcd0;
 }
+.main__button {
+  transition: color 1s;
+}
 .main__button--light {
   color: #1f081d;
 }
@@ -349,6 +375,15 @@
   background-color: #f13570;
 }
 
+.record {
+  transition: border 1s;
+}
+.record__text--formula {
+  transition: color 1s;
+}
+.record__text--result {
+  transition: color 1s;
+}
 .record--light {
   color: #1f081d;
   border: 1px solid #dd658b;

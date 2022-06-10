@@ -6,21 +6,25 @@
 }
 
 .body {
+    transition: background-color $transition-time;
     &--light {
         background-color: $light-background-color;
     }
 }
 .nav {
     &__colour-mode {
+        transition: background-color $transition-time;
         &--light {
             background-color: $light-button-color-3;
         }
     }
     &__github {
+        transition: background-color $transition-time;
         &--light {
             background-color: $light-button-color-3;
         }
         &--button-light {
+            transition: color $transition-time;
             color: $light-text-color;
             &:hover {
                 background-color: $light-button-hover;
@@ -29,13 +33,22 @@
     }
 }
 .header {
+    transition: background-color $transition-time;
+    &__result {
+        transition: color $transition-time;
+    }
+    &__formula {
+        transition: color $transition-time;
+    }
     &--light {
+        transition: background-color $transition-time;
         background-color: $light-display-color;
         color: $light-text-color;
     }
 }
 .main {
     &__box {
+        transition: background-color $transition-time;
         &--light1 {
             background-color: $light-button-color-1;
         }
@@ -47,6 +60,7 @@
         }
     }
     &__button {
+        transition: color $transition-time;
         &--light {
             color: $light-text-color;
             &:hover {
@@ -57,6 +71,13 @@
 }
 
 .record {
+    transition: border $transition-time;
+    &__text--formula {
+        transition: color $transition-time;
+    }
+    &__text--result {
+        transition: color $transition-time;
+    }
     &--light {
         color: $light-text-color;
         border: 1px solid $light-button-color-1;
